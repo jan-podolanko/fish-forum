@@ -1,7 +1,15 @@
+<script>
+import AddPost from "../components/AddPost.vue";
+
+export default {
+  components: {
+    AddPost,
+  },
+};
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <AddPost />
 </template>
 
 <style>

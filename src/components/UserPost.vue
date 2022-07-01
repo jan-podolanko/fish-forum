@@ -7,6 +7,7 @@ export default {
   },
   props: {
     title: String,
+    author: String,
     date: String,
     content: String,
   },
@@ -17,18 +18,20 @@ export default {
   <div id="postBody">
     <div id="postHeading">
       <div id="postTitle">{{ title }}</div>
-      <div id="postDate">Posted {{ date }}</div>
-      <button
-        id="expandButton"
-        class="material-symbols-outlined"
-        @click="
-          postVisible = !postVisible;
-          changeButton();
-        "
-      >
-        <div v-if="!postVisible">expand_more</div>
-        <div v-else>expand_less</div>
-      </button>
+      <div id="postDetails">
+        <button
+          id="expandButton"
+          class="material-symbols-outlined"
+          @click="
+            postVisible = !postVisible;
+            changeButton();
+          "
+        >
+          <div v-if="!postVisible">expand_more</div>
+          <div v-else>expand_less</div>
+        </button>
+        <div id="postData">Posted {{ date }} by {{ author }}</div>
+      </div>
     </div>
     <div v-if="postVisible" id="postContent">
       <div>{{ content }}</div>
@@ -38,28 +41,37 @@ export default {
 
 <style>
 #postBody {
-  width: 300px;
-  padding: 20px;
+  width: 350px;
   margin: auto;
-  border: 3px solid black;
+  border: 2px solid black;
   border-radius: 10px;
+  background-color: rgb(227, 227, 227);
 }
 #postHeading {
-  background-color: lightgrey;
+  background-color: rgb(187, 140, 29);
   padding: 10px;
   border-radius: 10px;
+  color: white;
+  border-bottom: 2px solid black;
 }
 #postContent {
-  padding-top: 10px;
+  padding: 10px;
 }
 #postTitle {
   font-size: 2em;
 }
 #expandButton {
-  background-color: orange;
+  background-color: rgb(227, 227, 227);
   border-radius: 10px;
+  color: rgb(0, 0, 0)
 }
-#postDate {
+#postData {
   font-size: 0.8em;
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: top;
+}
+#postDetails {
+  width: 100%;
 }
 </style>
