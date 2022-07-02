@@ -39,7 +39,9 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+@import "../assets/colors.scss";
+
 #postBody {
   width: 350px;
   margin: auto;
@@ -48,7 +50,7 @@ export default {
   background-color: rgb(227, 227, 227);
 }
 #postHeading {
-  background-color: rgb(187, 140, 29);
+  background-color: $primary;
   padding: 10px;
   border-radius: 10px;
   color: white;

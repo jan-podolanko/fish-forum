@@ -23,6 +23,9 @@ import { RouterLink, RouterView } from "vue-router";
 }
 html {
   background-color: lightgoldenrodyellow;
+  /*overflow-y: scroll;*/
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }
 #navBar > * {
   display: inline;
@@ -36,7 +39,7 @@ header {
   margin-bottom: 10px;
 }
 .navLink {
-  font-size: 30px;
+  font-size: 25px;
   background-color: burlywood;
   margin: 10px 5px;
   padding: 5px 10px;
