@@ -63,7 +63,12 @@ export default {
 #expandButton {
   background-color: rgb(227, 227, 227);
   border-radius: 10px;
-  color: rgb(0, 0, 0)
+  color: rgb(0, 0, 0);
+}
+#expandButton:hover {
+  background-color: grey;
+  color: white;
+  cursor: pointer;
 }
 #postData {
   font-size: 0.8em;
