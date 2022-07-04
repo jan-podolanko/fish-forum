@@ -22,10 +22,7 @@ export default {
         <button
           id="expandButton"
           class="material-symbols-outlined"
-          @click="
-            postVisible = !postVisible;
-            changeButton();
-          "
+          @click="postVisible = !postVisible"
         >
           <div v-if="!postVisible">expand_more</div>
           <div v-else>expand_less</div>

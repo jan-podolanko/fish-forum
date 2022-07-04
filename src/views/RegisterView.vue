@@ -1,13 +1,13 @@
 <script lang="ts">
-import LoginForm from "@/components/LoginForm.vue";
+import RegisterForm from "@/components/RegisterForm.vue";
 
 export default {
   components: {
-    LoginForm,
+    RegisterForm,
   },
 };
 </script>
 
 <template>
-  <LoginForm />
+  <RegisterForm />
 </template>

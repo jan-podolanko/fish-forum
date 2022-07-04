@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
+import NavBar from "./components/NavBar.vue";
 </script>
 
 <template>
-  <header>
-    <div id="navBar">
-      <img id="logo" src="./assets/logo.svg" />
-      <nav>
-        <RouterLink class="navLink" to="/">Home</RouterLink>
-        <RouterLink class="navLink" to="/create">Create post</RouterLink>
-        <RouterLink class="navLink" to="/login">Login</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <NavBar />
   <RouterView />
 </template>
 
@@ -26,31 +18,6 @@ html {
   /*overflow-y: scroll;*/
   overflow-x: hidden;
   margin-right: calc(-1 * (100vw - 100%));
-}
-#navBar > * {
-  display: inline;
-}
-#logo {
-  height: 50px;
-}
-header {
-  background-color: brown;
-  height: 80px;
-  margin-bottom: 10px;
-}
-.navLink {
-  font-size: 25px;
-  background-color: burlywood;
-  margin: 10px 5px;
-  padding: 5px 10px;
-  letter-spacing: 3px;
-  border-radius: 10px;
-  color: black;
-  text-decoration: none;
-}
-.navLink:hover {
-  background-color: lightcoral;
-  color: white;
 }
 body {
   margin: 0;

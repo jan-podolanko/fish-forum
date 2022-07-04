@@ -1,11 +1,15 @@
 <script>
+/* import { initAuth } from "../firebase/auth";
+const { loginEmailPassword, registerEmailPassword, logout } = initAuth();
+ */
 import { auth } from "../firebase/firebase";
-import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default {
   data() {
     return {
       form: {
+        name: "",
         email: "",
         password: "",
       },
@@ -14,7 +18,7 @@ export default {
   },
   methods: {
     submit() {
-      signInWithEmailAndPassword(auth, this.form.email, this.form.password)
+      createUserWithEmailAndPassword(auth, this.form.email, this.form.password)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -31,7 +35,14 @@ export default {
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="submit">
+    <input
+      id="name"
+      type="name"
+      required
+      v-model="form.name"
+      placeholder="Name"
+    />
     <input
       id="email"
       type="email"
@@ -48,8 +59,7 @@ export default {
       placeholder="Password"
     />
     <div id="buttons">
-      <button>Login</button>
-      <button>Register</button>
+      <button type="submit">Register</button>
     </div>
   </form>
   <div v-if="error">{{ error }}</div>

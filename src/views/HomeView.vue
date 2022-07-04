@@ -1,8 +1,7 @@
 <script lang="ts">
 import UserPost from "@/components/UserPost.vue";
-import { defineComponent } from "vue";
 
-export default defineComponent({
+export default {
   components: {
     UserPost,
   },
@@ -17,7 +16,7 @@ export default defineComponent({
       },
     };
   },
-});
+};
 </script>
 
 <template>
