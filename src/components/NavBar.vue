@@ -1,10 +1,21 @@
-<script>
+<script lang="ts">
 import { RouterLink } from "vue-router";
+import { mapGetters } from "vuex";
+import { auth } from "../firebase/firebase";
 export default {
-  data() {
-    return {
-      loggedIn: true,
-    };
+  computed: {
+    ...mapGetters({
+      user: "user",
+    }),
+  },
+  methods: {
+    signOut() {
+      auth.signOut().then(() => {
+        this.$router.replace({
+          name: "home",
+        });
+      });
+    },
   },
 };
 </script>
@@ -16,13 +27,11 @@ export default {
       <nav>
         <RouterLink class="navLink" to="/">Home</RouterLink>
         <RouterLink class="navLink" to="/create">Create post</RouterLink>
-        <RouterLink v-if="!loggedIn" class="navLink" to="/login"
-          >Login</RouterLink
-        >
-        <button v-else @click="loggedIn = !loggedIn">log out</button>
-        <RouterLink class="navLink" to="/register">register</RouterLink>
-        <div v-if="user">Logged in as: {{ user }}</div>
+        <RouterLink class="navLink" to="/register">Register</RouterLink>
+        <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">Login</RouterLink>
+        <button v-else @click="signOut" class="navLink">Sign out</button>
       </nav>
+      <div v-if="user.loggedIn">Logged in as: {{ user.data }}</div>
     </div>
   </header>
 </template>
@@ -49,10 +58,12 @@ header {
   border-radius: 10px;
   color: black;
   text-decoration: none;
+  border: 0;
 }
 .navLink:hover {
   background-color: lightcoral;
   color: white;
+  cursor: pointer;
 }
 nav {
   vertical-align: center;

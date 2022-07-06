@@ -22,6 +22,5 @@ export default {
 <template>
   <main>
     <UserPost v-bind="post" />
-    <AddPost />
   </main>
 </template>

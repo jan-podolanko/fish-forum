@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <template>
   <form>
     <input placeholder="Title" />

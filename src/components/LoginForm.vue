@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="submit">
     <input
       id="email"
       type="email"
@@ -43,13 +43,11 @@ export default {
       id="password"
       type="password"
       required
-      minlength="6"
       v-model="form.password"
       placeholder="Password"
     />
     <div id="buttons">
-      <button>Login</button>
-      <button>Register</button>
+      <button type="submit">Login</button>
     </div>
   </form>
   <div v-if="error">{{ error }}</div>
