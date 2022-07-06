@@ -1,5 +1,4 @@
 <script lang="ts">
-import { RouterLink } from "vue-router";
 import { mapGetters } from "vuex";
 import { auth } from "../firebase/firebase";
 export default {
@@ -23,7 +22,7 @@ export default {
 <template>
   <header>
     <div id="navBar">
-      <img id="logo" src="../assets/logo.svg" />
+      <img id="logo" src="../assets/forum_logo.png" />
       <nav>
         <RouterLink class="navLink" to="/">Home</RouterLink>
         <RouterLink class="navLink" to="/create">Create post</RouterLink>
@@ -36,33 +35,39 @@ export default {
   </header>
 </template>
 
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+<style scoped lang="scss">
+@import "../assets/colors.scss";
+
 #navBar > * {
   display: inline;
 }
 #logo {
+  position: relative;
   height: 50px;
+  top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 header {
-  background-color: brown;
+  background-color: $light-mode-light;
+  color: $on-light-mode;
   height: 80px;
   margin-bottom: 10px;
 }
 .navLink {
+  background-color: $primary;
+  color: $on-primary;
   font-size: 25px;
-  background-color: burlywood;
   margin: 10px 5px;
   padding: 5px 10px;
   letter-spacing: 3px;
   border-radius: 10px;
-  color: black;
   text-decoration: none;
   border: 0;
 }
 .navLink:hover {
-  background-color: lightcoral;
-  color: white;
+  background-color: $primary-dark;
+  color: $on-primary-dark;
   cursor: pointer;
 }
 nav {

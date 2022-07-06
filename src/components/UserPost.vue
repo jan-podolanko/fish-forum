@@ -44,14 +44,14 @@ export default {
   margin: auto;
   border: 2px solid black;
   border-radius: 10px;
-  background-color: rgb(227, 227, 227);
+  background-color: $light-mode-medium;
 }
 #postHeading {
-  background-color: $primary;
-  padding: 10px;
+  background-color: $light-mode-light;
+  color: $on-light-mode;
+  padding: 10px 10px 5px 10px;
   border-radius: 10px;
-  color: white;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid $on-light-mode;
 }
 #postContent {
   padding: 10px;
@@ -60,13 +60,14 @@ export default {
   font-size: 2em;
 }
 #expandButton {
-  background-color: rgb(227, 227, 227);
-  border-radius: 10px;
-  color: rgb(0, 0, 0);
+  background-color: $primary;
+  border-radius: 7px;
+  color: $on-primary;
+  border: 0;
 }
 #expandButton:hover {
-  background-color: grey;
-  color: white;
+  background-color: $primary-dark;
+  color: $on-primary-dark;
   cursor: pointer;
 }
 #postData {
