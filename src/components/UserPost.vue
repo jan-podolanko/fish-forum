@@ -8,7 +8,7 @@ export default {
   props: {
     title: String,
     author: String,
-    date: String,
+    date: Date,
     content: String,
   },
 };
@@ -45,6 +45,7 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   background-color: $light-mode-medium;
+  margin: 10px auto;
 }
 #postHeading {
   background-color: $light-mode-light;
