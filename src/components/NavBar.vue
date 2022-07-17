@@ -30,7 +30,7 @@ export default {
         <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">Login</RouterLink>
         <button v-else @click="signOut" class="navLink">Sign out</button>
       </nav>
-      <div v-if="user.loggedIn">Logged in as: {{ user.data }}</div>
+      <div v-if="user.loggedIn">Logged in as: {{ user.data.displayName }}</div>
     </div>
   </header>
 </template>

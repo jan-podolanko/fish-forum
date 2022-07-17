@@ -1,10 +1,42 @@
 <script>
+import { collection, addDoc, Timestamp } from "firebase/firestore"; 
+import { db } from "../firebase/firebase"
+import { mapGetters } from "vuex";
+
+export default {
+  data(){
+    return{
+      form: {
+        title: "",
+        user: "",
+        content: ""
+      },
+      currentDate: Timestamp.now()
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: "user",
+    }),
+  },
+  methods: {
+    submit() {
+      addDoc(collection(db, "posts"), {
+        title: this.form.title,
+        user: this.user.data.displayName,
+        content: this.form.content,
+        date: Timestamp.now()
+      })
+    },
+  },
+}
 </script>
 
 <template>
-  <form>
-    <input placeholder="Title" />
-    <textarea placeholder="Post content" />
+  <div> {{ currentDate }}</div>
+  <form @submit.prevent="submit">
+    <input v-model="form.title" placeholder="Title" />
+    <textarea v-model="form.content" placeholder="Post content" />
     <button>Submit</button>
   </form>
 </template>

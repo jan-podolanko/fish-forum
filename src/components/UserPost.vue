@@ -40,12 +40,13 @@ export default {
 @import "../assets/colors.scss";
 
 #postBody {
-  width: 350px;
-  margin: auto;
+  width: auto;
   border: 2px solid black;
   border-radius: 10px;
   background-color: $light-mode-medium;
-  margin: 10px auto;
+  margin-top: 15px;
+  margin-left: 30px;
+  margin-right: 200px;
 }
 #postHeading {
   background-color: $light-mode-light;
