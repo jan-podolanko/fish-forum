@@ -33,10 +33,9 @@ export default {
 </script>
 
 <template>
-  <div> {{ currentDate }}</div>
   <form @submit.prevent="submit">
-    <input v-model="form.title" placeholder="Title" />
-    <textarea v-model="form.content" placeholder="Post content" />
+    <input required v-model="form.title" placeholder="Title" />
+    <textarea required v-model="form.content" placeholder="Post content" />
     <button>Submit</button>
   </form>
 </template>
