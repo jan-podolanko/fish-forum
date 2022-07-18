@@ -24,6 +24,7 @@ export default {
       addDoc(collection(db, "posts"), {
         title: this.form.title,
         user: this.user.data.displayName,
+        email: this.user.data.email,
         content: this.form.content,
         date: Timestamp.now()
       })

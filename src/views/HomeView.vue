@@ -27,10 +27,13 @@ export default {
       onSnapshot(collection(db, "posts"), (querySnapshot) => {
         this.posts = [];
         querySnapshot.forEach((doc) => {
-          this.posts.push({title: doc.data().title,
+          this.posts.push({
+          id: doc.id,
+          title: doc.data().title,
           author: doc.data().user,
           date: doc.data().date.toDate(),
-          content: doc.data().content})
+          content: doc.data().content,
+          email: doc.data().email});
           console.log(doc.data())
         })
       });
