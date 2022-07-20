@@ -20,27 +20,22 @@ export default {
 </script>
 
 <template>
-  <header>
-    <div id="navBar">
-      <img id="logo" src="../assets/forum_logo.png" />
-      <nav>
-        <RouterLink class="navLink" to="/">Home</RouterLink>
-        <RouterLink class="navLink" to="/create">Create post</RouterLink>
-        <RouterLink class="navLink" to="/register">Register</RouterLink>
-        <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">Login</RouterLink>
-        <button v-else @click="signOut" class="navLink">Sign out</button>
-      </nav>
-      <div v-if="user.loggedIn">Logged in as: {{ user.data.displayName }}</div>
-    </div>
-  </header>
+  <div id="navBar">
+    <!-- <img id="logo" src="../assets/forum_logo.png" /> -->
+    <li>
+      <RouterLink class="navLink" to="/">Home</RouterLink>
+      <RouterLink class="navLink" to="/create">Create post</RouterLink>
+      <RouterLink class="navLink" to="/register">Register</RouterLink>
+      <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">Login</RouterLink>
+      <button v-else @click="signOut" class="navLink">Sign out</button>
+    </li>
+    <div v-if="user.loggedIn">Logged in as: {{ user.data.displayName }}</div>
+  </div>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/colors.scss";
 
-#navBar > * {
-  display: inline;
-}
 #logo {
   position: relative;
   height: 50px;
@@ -64,13 +59,23 @@ header {
   border-radius: 10px;
   text-decoration: none;
   border: 0;
+  display: block;
 }
 .navLink:hover {
   background-color: $primary-dark;
   color: $on-primary-dark;
   cursor: pointer;
 }
-nav {
-  vertical-align: center;
+#navBar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: $light-mode-light;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  right: 0;
+  top: 0;
 }
 </style>

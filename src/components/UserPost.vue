@@ -68,9 +68,7 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   background-color: $light-mode-medium;
-  margin-top: 15px;
-  margin-left: 30px;
-  margin-right: 200px;
+  margin: 15px;
 }
 #postHeading {
   background-color: $light-mode-light;
