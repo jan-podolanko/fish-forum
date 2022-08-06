@@ -13,7 +13,7 @@ import NavBar from "./components/NavBar.vue";
 @import "./assets/colors.scss";
 
 #app {
-  font-family: "Jost", sans-serif;
+  font-family: "Jost", sans-serif !important;
   width: 70%;
 }
 html {
@@ -26,5 +26,18 @@ body {
 }
 nav {
   vertical-align: center;
+}
+button {
+  background-color: $primary;
+  border-radius: 7px;
+  color: $on-primary;
+  border: 0;
+  vertical-align: center;
+  font-family: "Jost", sans-serif;
+}
+button:hover {
+  background-color: $primary-dark;
+  color: $on-primary-dark;
+  cursor: pointer;
 }
 </style>

@@ -60,6 +60,7 @@ header {
   text-decoration: none;
   border: 0;
   display: block;
+  font-family: "Jost", sans-serif;
 }
 .navLink:hover {
   background-color: $primary-dark;

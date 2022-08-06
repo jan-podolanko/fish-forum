@@ -83,32 +83,18 @@ form > * {
 input {
   margin: 10px auto;
   border: 0;
-  border-bottom: 2px solid brown;
-  background-color: lightgoldenrodyellow;
+  border-bottom: 2px solid $primary;
+  background-color: $light-mode-light;
   display: block;
   outline: 0;
 }
 input:focus {
   border: 0px;
   outline: 0 !important;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid $primary-dark;
 }
 #buttons {
   display: block;
   text-align: center;
-
-  button {
-    background-color: burlywood;
-    margin: 0px 5px;
-    border: 0;
-    border-radius: 5px;
-    padding: 10px;
-    font-weight: bold;
-  }
-  button:hover {
-    background-color: lightcoral;
-    color: white;
-    cursor: pointer;
-  }
 }
 </style>

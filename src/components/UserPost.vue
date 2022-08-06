@@ -33,7 +33,7 @@ export default {
 <template>
   <div id="postBody">
     <div id="postHeading">
-      <div id="postTitle">{{ title }}</div>
+      <RouterLink id="postTitle" :to="'/comments/' + id" >{{ title }}</RouterLink>
       <div id="postDetails">
         <button
           id="expandButton"

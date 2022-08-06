@@ -53,11 +53,39 @@ export default {
 </script>
 
 <template>
-<button @click="posts.sort(sortByTitleAsc)">abc</button>
-<button @click="posts.sort(sortByTitleDesc)">cba</button>
+<span>Sort by: </span>
+<button class="sortButton" @click="posts.sort(sortByTitleAsc)">By title, ascending</button>
+<button class="sortButton" @click="posts.sort(sortByTitleDesc)">By title, descending</button>
+<button class="sortButton" @click="posts.sort(sortByDateAsc)">By date, ascending</button>
+<button class="sortButton" @click="posts.sort(sortByDateDesc)">By date, descending</button>
   <main>
     <div v-for="post1 in posts">
       <UserPost v-bind="post1" />
     </div>
   </main>
 </template>
+
+<style scoped lang="scss">
+@import "../assets/colors.scss";
+
+.sortButton {
+  margin-left: 10px;
+  margin-top: 10px;
+  font-family: "Jost", sans-serif;
+}
+button {
+  background-color: $primary;
+  border-radius: 7px;
+  color: $on-primary;
+  border: 0;
+  vertical-align: center;
+}
+button:hover {
+  background-color: $primary-dark;
+  color: $on-primary-dark;
+  cursor: pointer;
+}
+span {
+  margin-left: 10px;
+}
+</style>
