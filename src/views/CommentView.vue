@@ -2,11 +2,12 @@
 import PostComments from "@/components/PostComments.vue";
 import { db } from "@/firebase/firebase";
 import { onSnapshot, collection } from "@firebase/firestore";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   data() {
     return{
-      comments: []
+      comments: [] as any[]
     }
   },
   components: {
@@ -34,7 +35,7 @@ export default {
       });
     },
   }
-};
+});
 </script>
 
 <template>

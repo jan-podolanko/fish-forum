@@ -1,7 +1,8 @@
 <script lang="ts">
+import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 import { auth } from "../firebase/firebase";
-export default {
+export default defineComponent({
   computed: {
     ...mapGetters({
       user: "user",
@@ -16,7 +17,7 @@ export default {
       });
     },
   },
-};
+});
 </script>
 
 <template>

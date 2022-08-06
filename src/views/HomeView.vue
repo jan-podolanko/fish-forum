@@ -1,15 +1,16 @@
 <script lang="ts">
 import UserPost from "@/components/UserPost.vue";
 import { collection, onSnapshot } from "firebase/firestore";
+import { defineComponent } from "vue";
 import { db } from "../firebase/firebase";
 
-export default {
+export default defineComponent({
   components: {
     UserPost,
   },
   data() {
     return {
-      posts: [],
+      posts: [] as any[],
       sorting: null,
     };
   },
@@ -49,7 +50,7 @@ export default {
       return 0
     },
   }
-};
+});
 </script>
 
 <template>
