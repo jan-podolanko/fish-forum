@@ -1,23 +1,27 @@
 <script lang="ts">
-import PostComments from "@/components/PostComments.vue";
+import PostComment from "@/components/PostComment.vue";
 import { db } from "@/firebase/firebase";
-import { onSnapshot, collection } from "@firebase/firestore";
+import { onSnapshot, collection, getDoc, doc } from "@firebase/firestore";
 import { defineComponent } from "vue";
+import UserPost from "../components/UserPost.vue";
 
 export default defineComponent({
   data() {
     return{
-      comments: [] as any[]
+      comments: [] as any[],
+      post: {} as any[]
     }
   },
   components: {
-    PostComments,
+    PostComment,
+    UserPost
   },
   props: {
     id: String,
   },
   created(){
-    this.getComments()
+    this.getComments();
+    this.getPost();
   },
   methods: {
     getComments() {
@@ -34,13 +38,26 @@ export default defineComponent({
         })
       });
     },
-  }
+    async getPost() {
+      await getDoc(doc(db, "posts", this.id)).then((result) => {
+        this.post = [];
+        this.post.push({
+          id: result.id,
+          title: result.data()?.title,
+          author: result.data()?.user,
+          date: result.data()?.date.toDate(),
+          content: result.data()?.content,
+          email: result.data()?.email})
+          console.log(result.data())
+      });
+    }
+  },
 });
 </script>
 
 <template>
-  {{id}}
-  <div v-for="comment in comments">
-    <PostComments v-bind=comment />
+  <UserPost v-bind=post[0] />
+  <div id="comments" v-for="comment in comments">
+    <PostComment v-bind=comment />
   </div>
 </template>

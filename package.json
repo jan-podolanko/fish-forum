@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "eslint-import-resolver-typescript": "^3.4.0",
     "firebase": "^9.8.4",
     "sass": "^1.53.0",
     "vue": "^3.2.37",

@@ -1,11 +1,9 @@
-<script>
-/* import { initAuth } from "../firebase/auth";
-const { loginEmailPassword, registerEmailPassword, logout } = initAuth();
- */
+<script lang="ts">
 import { auth } from "../firebase/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   data() {
     return {
       form: {
@@ -31,7 +29,7 @@ export default {
         });
     },
   },
-};
+});
 </script>
 
 <template>

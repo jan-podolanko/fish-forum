@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 import { auth } from "../firebase/firebase";
 import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   data() {
     return {
       form: {
@@ -18,16 +19,13 @@ export default {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          updateProfile(user, {
-            displayName: this.form.name,
-          });
         })
         .catch((error) => {
           this.error = error.message;
         });
     },
   },
-};
+});
 </script>
 
 <template>

@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 import { auth } from "../firebase/firebase";
+
 export default defineComponent({
   computed: {
     ...mapGetters({
