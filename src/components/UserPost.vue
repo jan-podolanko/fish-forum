@@ -64,7 +64,7 @@ export default {
 @import "../assets/colors.scss";
 
 #postBody {
-  width: auto;
+  width: 90%;
   border: 2px solid black;
   border-radius: 10px;
   background-color: $light-mode-medium;

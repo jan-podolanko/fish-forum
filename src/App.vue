@@ -14,7 +14,7 @@ import NavBar from "./components/NavBar.vue";
 
 #app {
   font-family: "Jost", sans-serif !important;
-  width: 70%;
+  width: 75%;
 }
 html {
   background-color: $light-mode-dark;

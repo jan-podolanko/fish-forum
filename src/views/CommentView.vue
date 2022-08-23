@@ -47,8 +47,8 @@ export default defineComponent({
           author: result.data()?.user,
           date: result.data()?.date.toDate(),
           content: result.data()?.content,
-          email: result.data()?.email})
-          console.log(result.data())
+          email: result.data()?.email});
+          console.log(result.data());
       });
     }
   },
