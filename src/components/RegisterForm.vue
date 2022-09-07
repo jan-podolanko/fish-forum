@@ -1,7 +1,7 @@
 <script lang="ts">
-import { auth } from "../firebase/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { defineComponent } from "vue";
+import { auth } from "../firebase/firebase";
 
 export default defineComponent({
   data() {
@@ -22,6 +22,9 @@ export default defineComponent({
           const user = userCredential.user;
           updateProfile(user, {
             displayName: this.form.name,
+          });
+          this.$router.push({
+            name: "home",
           });
         })
         .catch((error) => {
@@ -57,7 +60,7 @@ export default defineComponent({
       placeholder="Password"
     />
     <div id="buttons">
-      <button type="submit">Register</button>
+      <button id="submit" type="submit">Register</button>
     </div>
   </form>
   <div v-if="error">{{ error }}</div>
@@ -69,14 +72,20 @@ export default defineComponent({
 form {
   max-width: 200px;
   padding: 10px;
-  margin: auto;
+  margin: {
+    top: 20%;
+    left: auto;
+    right: auto;
+  }
   border: 3px solid black;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
+  background-color: $light-mode-medium;
 }
 form > * {
   font-family: "Jost", sans-serif;
+  font-size: 1em;
 }
 input {
   margin: 10px auto;
@@ -94,5 +103,9 @@ input:focus {
 #buttons {
   display: block;
   text-align: center;
+}
+#submit {
+  font-size: 1.2em;
+  padding: 3px 10px;
 }
 </style>

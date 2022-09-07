@@ -1,7 +1,7 @@
 <script lang="ts">
-import { auth } from "../firebase/firebase";
-import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { defineComponent } from "vue";
+import { auth } from "../firebase/firebase";
 
 export default defineComponent({
   data() {
@@ -19,6 +19,9 @@ export default defineComponent({
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          this.$router.push({
+            name: "home",
+          });
         })
         .catch((error) => {
           this.error = error.message;
@@ -45,7 +48,7 @@ export default defineComponent({
       placeholder="Password"
     />
     <div id="buttons">
-      <button type="submit">Login</button>
+      <button id="submit" type="submit">Login</button>
     </div>
   </form>
   <div v-if="error">{{ error }}</div>
@@ -57,44 +60,40 @@ export default defineComponent({
 form {
   max-width: 200px;
   padding: 10px;
-  margin: auto;
+  margin: {
+    top: 20%;
+    left: auto;
+    right: auto;
+  }
   border: 3px solid black;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
+  background-color: $light-mode-medium;
 }
 form > * {
   font-family: "Jost", sans-serif;
+  font-size: 1em;
 }
 input {
   margin: 10px auto;
   border: 0;
-  border-bottom: 2px solid brown;
-  background-color: lightgoldenrodyellow;
+  border-bottom: 2px solid $primary;
+  background-color: $light-mode-light;
   display: block;
   outline: 0;
 }
 input:focus {
   border: 0px;
   outline: 0 !important;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid $primary-dark;
 }
 #buttons {
   display: block;
   text-align: center;
-
-  button {
-    background-color: burlywood;
-    margin: 0px 5px;
-    border: 0;
-    border-radius: 5px;
-    padding: 10px;
-    font-weight: bold;
-  }
-  button:hover {
-    background-color: lightcoral;
-    color: white;
-    cursor: pointer;
-  }
+}
+#submit {
+  font-size: 1.2em;
+  padding: 3px 10px;
 }
 </style>

@@ -23,15 +23,15 @@ export default defineComponent({
 
 <template>
   <div id="navBar">
-    <!-- <img id="logo" src="../assets/forum_logo.png" /> -->
+    <div id="logoFish">🐟🐟🐟</div>
     <li>
       <RouterLink class="navLink" to="/">Home</RouterLink>
       <RouterLink class="navLink" to="/create">Create post</RouterLink>
       <RouterLink class="navLink" to="/register">Register</RouterLink>
       <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">Login</RouterLink>
-      <button v-else @click="signOut" class="navLink">Sign out</button>
+      <button v-else id="logOut" @click="signOut" class="navLink">Sign out</button>
     </li>
-    <div v-if="user.loggedIn">Logged in as: {{ user.data.displayName }}</div>
+    <div id="userData" v-if="user.loggedIn">Logged in as: {{ user.data.displayName }}</div>
   </div>
 </template>
 
@@ -55,14 +55,23 @@ header {
   background-color: $primary;
   color: $on-primary;
   font-size: 25px;
-  margin: 10px 5px;
+  margin: {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+  }
   padding: 5px 10px;
   letter-spacing: 3px;
   border-radius: 10px;
   text-decoration: none;
   border: 0;
+  max-width: calc(100% - 20px);
+  text-align: left;
   display: block;
   font-family: "Jost", sans-serif;
+}
+#logOut {
+  width: calc(100% - 20px);
 }
 .navLink:hover {
   background-color: $primary-dark;
@@ -74,11 +83,25 @@ header {
   margin: 0;
   padding: 0;
   width: 25%;
+  max-width: 250px;
   background-color: $light-mode-light;
   height: 100%;
   position: fixed;
   overflow: auto;
   right: 0;
   top: 0;
+}
+#userData {
+  margin: {
+    top: 30px;
+    left: 15px;
+  }
+}
+#logoFish {
+  text-align: center;
+  font-size: 36px;
+  user-select: none;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 </style>

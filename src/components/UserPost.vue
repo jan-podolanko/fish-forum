@@ -1,7 +1,7 @@
 <script lang="ts">
-import { mapGetters } from "vuex";
-import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
+import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -21,12 +21,24 @@ export default {
     date: Date,
     content: String,
     email: String,
+    rating: Number,
+    upvotedby: Array,
   },
   methods: {
-    deletePost(post: string){
+    deletePost(post: string) {
       deleteDoc(doc(db, "posts", post));
-    }
-  }
+    },
+    upvotePost(post: string) {
+      updateDoc(doc(db, "posts", post), {
+        rating: increment(1)
+      });
+    },
+    downvotePost(post: string) {
+      updateDoc(doc(db, "posts", post), {
+        rating: increment(-1)
+      });
+    },
+  },
 };
 </script>
 
@@ -34,6 +46,21 @@ export default {
   <div id="postBody">
     <div id="postHeading">
       <RouterLink id="postTitle" :to="'/comments/' + id" >{{ title }}</RouterLink>
+      <div id="ratingBox">
+        <span id="rating"> rated {{ rating }}</span>
+        <button
+          @click="upvotePost(id)"
+          class="material-symbols-outlined voteButton"
+        >
+          arrow_upward
+        </button>
+        <button
+          @click="downvotePost(id)"
+          class="material-symbols-outlined voteButton"
+        >
+          arrow_downward
+        </button>
+      </div>
       <div id="postDetails">
         <button
           id="expandButton"
@@ -45,8 +72,8 @@ export default {
         </button>
         <div id="postData">Posted {{ date }} by {{ author }}</div>
       </div>
-      <button 
-        v-if="user.data.email == email" 
+      <button
+        v-if="user.data.email == email"
         @click="deletePost(id)"
         id="deleteButton"
         class="material-symbols-outlined"
@@ -83,6 +110,11 @@ export default {
 }
 #postTitle {
   font-size: 2em;
+  color: black;
+  text-decoration: none;
+}
+#postTitle:hover {
+  color: $primary-dark;
 }
 button {
   background-color: $primary;
@@ -100,6 +132,7 @@ button:hover {
   display: inline-block;
   padding-left: 10px;
   vertical-align: top;
+  width: calc(100% - 50px);
 }
 #postDetails {
   width: 100%;
@@ -108,5 +141,21 @@ button:hover {
   position: absolute;
   right: 10px;
   top: 10px;
+}
+.voteButton {
+  display: inline;
+  margin: {
+    left: 5px;
+  }
+}
+#expandButton {
+  width: 40px;
+}
+#rating {
+  vertical-align: top;
+}
+#ratingBox {
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 </style>
