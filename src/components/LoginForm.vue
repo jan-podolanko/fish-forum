@@ -16,9 +16,7 @@ export default defineComponent({
   methods: {
     submit() {
       signInWithEmailAndPassword(auth, this.form.email, this.form.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
+        .then(() => {
           this.$router.push({
             name: "home",
           });
@@ -66,7 +64,7 @@ form {
     right: auto;
   }
   border: 3px solid black;
-  border-radius: 10px;
+  border-radius: 6px;
   align-items: center;
   justify-content: center;
   background-color: $light-mode-medium;

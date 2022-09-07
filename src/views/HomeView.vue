@@ -49,14 +49,22 @@ export default defineComponent({
       return b.date - a.date;
     },
     sortByTitleAsc(a: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; },b: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; }){
-      if(a.title.toLowerCase().trim() < b.title.toLowerCase().trim()) {return -1}
-      if(a.title.toLowerCase().trim() > b.title.toLowerCase().trim()) {return 1}
-      return 0
+      if (a.title.toLowerCase().trim() < b.title.toLowerCase().trim()) {
+        return -1;
+      }
+      if (a.title.toLowerCase().trim() > b.title.toLowerCase().trim()) {
+        return 1;
+      }
+      return 0;
     },
     sortByTitleDesc(a: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; },b: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; }){
-      if(a.title.toLowerCase().trim() < b.title.toLowerCase().trim()) {return 1}
-      if(a.title.toLowerCase().trim() > b.title.toLowerCase().trim()) {return -1}
-      return 0
+      if (a.title.toLowerCase().trim() < b.title.toLowerCase().trim()) {
+        return 1;
+      }
+      if (a.title.toLowerCase().trim() > b.title.toLowerCase().trim()) {
+        return -1;
+      }
+      return 0;
     },
     sortByRatingAsc(a: { rating: number }, b: { rating: number }) {
       return a.rating - b.rating;
@@ -71,12 +79,24 @@ export default defineComponent({
 <template>
   <div v-if="user.loggedIn">
     <span>Sort by: </span>
-    <button class="sortButton" @click="posts.sort(sortByTitleAsc)">By title, ascending</button>
-    <button class="sortButton" @click="posts.sort(sortByTitleDesc)">By title, descending</button>
-    <button class="sortButton" @click="posts.sort(sortByDateAsc)">By date, ascending</button>
-    <button class="sortButton" @click="posts.sort(sortByDateDesc)">By date, descending</button>
-    <button class="sortButton" @click="posts.sort(sortByRatingAsc)">By rating, ascending</button>
-    <button class="sortButton" @click="posts.sort(sortByRatingDesc)">By rating, descending</button>
+    <button class="sortButton" @click="posts.sort(sortByTitleAsc)">
+      By title, ascending
+    </button>
+    <button class="sortButton" @click="posts.sort(sortByTitleDesc)">
+      By title, descending
+    </button>
+    <button class="sortButton" @click="posts.sort(sortByDateAsc)">
+      By date, ascending
+    </button>
+    <button class="sortButton" @click="posts.sort(sortByDateDesc)">
+      By date, descending
+    </button>
+    <button class="sortButton" @click="posts.sort(sortByRatingAsc)">
+      By rating, ascending
+    </button>
+    <button class="sortButton" @click="posts.sort(sortByRatingDesc)">
+      By rating, descending
+    </button>
     <main>
       <div v-for="post1 in posts" :key="post1.id">
         <UserPost v-bind="post1" />
@@ -99,7 +119,7 @@ export default defineComponent({
 }
 button {
   background-color: $primary;
-  border-radius: 7px;
+  border-radius: 6px;
   color: $on-primary;
   border: 0;
   vertical-align: center;
@@ -108,6 +128,7 @@ button:hover {
   background-color: $primary-dark;
   color: $on-primary-dark;
   cursor: pointer;
+  outline: 2px solid $on-primary-dark;
 }
 span {
   margin-left: 10px;
@@ -125,7 +146,7 @@ span {
   font-size: xx-large;
   padding: 5px 10px;
   letter-spacing: 3px;
-  border-radius: 10px;
+  border-radius: 6px;
   text-decoration: none;
   border: 0;
   text-align: center;

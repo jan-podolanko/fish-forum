@@ -10,7 +10,7 @@ export default defineComponent({
   data() {
     return {
       comments: [] as any[],
-      post: {} as any[]
+      post: {} as any[],
     };
   },
   components: {
@@ -21,14 +21,14 @@ export default defineComponent({
   props: {
     id: String,
   },
-  created(){
+  created() {
     this.getComments();
     this.getPost();
   },
   methods: {
     getComments() {
       onSnapshot(collection(db, "posts", this.id, "comments"), (querySnapshot) => {
-        this.comments = [];
+          this.comments = [];
           querySnapshot.forEach((doc) => {
             this.comments.push({
               postid: this.id,

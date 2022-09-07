@@ -17,7 +17,7 @@ import NavBar from "./components/NavBar.vue";
   width: 75%;
 }
 html {
-  background-color: $light-mode-dark;
+  background-color: $light-mode-medium;
   overflow-x: hidden;
   margin-right: calc(-1 * (100vw - 100%));
 }
@@ -29,7 +29,7 @@ nav {
 }
 button {
   background-color: $primary;
-  border-radius: 7px;
+  border-radius: 6px;
   color: $on-primary;
   border: 0;
   vertical-align: center;
@@ -38,6 +38,7 @@ button {
 button:hover {
   background-color: $primary-dark;
   color: $on-primary-dark;
+  outline: 2px solid $on-primary-dark;
   cursor: pointer;
 }
 </style>

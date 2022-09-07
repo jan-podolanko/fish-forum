@@ -16,16 +16,16 @@ export default defineComponent({
   },
   methods: {
     deletePost() {
-      deleteDoc(doc(db, "posts", postid, commentid));
+      deleteDoc(doc(db, "posts", this.postid, "comments", this.commentid));
     },
     upvoteComment() {
       updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
-        rating: increment(1)
+        rating: increment(1),
       });
     },
     downvoteComment() {
       updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
-        rating: increment(-1)
+        rating: increment(-1),
       });
     },
   },
@@ -65,18 +65,19 @@ export default defineComponent({
 @import "../assets/colors.scss";
 
 #comment {
-  width: auto;
-  background-color: $light-mode-medium;
+  width: 90%;
+  background-color: $light-mode-light;
   margin: 15px;
-  border-radius: 10px;
-  border: 2px solid black;
+  border-radius: 6px;
+  border-right: 2px solid $on-light-mode;
+  border-bottom: 2px solid $on-light-mode;
 }
 #commentHeading {
   background-color: $light-mode-light;
   position: relative;
   color: $on-light-mode;
   padding: 10px 10px 5px 10px;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 #commentUsername {
   font-weight: bold;
@@ -86,5 +87,15 @@ export default defineComponent({
 }
 #commentContent {
   padding: 10px;
+}
+#rating {
+  font-size: small;
+}
+.voteButton {
+  display: inline;
+  margin: {
+    left: 5px;
+  }
+  font-size: 18px;
 }
 </style>

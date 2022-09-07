@@ -51,7 +51,7 @@ export default defineComponent({
       v-model="form.content"
       placeholder="Comment here"
     />
-    <button>Submit</button>
+    <button class="material-symbols-outlined">send</button>
   </form>
   <button
     id="showAddComment"
@@ -66,11 +66,13 @@ export default defineComponent({
 @import "../assets/colors.scss";
 
 #addComment {
-  background-color: #000000;
+  background-color: $light-mode-medium;
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 70px;
   padding: 15px;
+  border-top: 2px solid black;
   #commentContent {
     padding: {
       top: 3px;
@@ -82,18 +84,20 @@ export default defineComponent({
     margin-left: 0;
     resize: none;
     font-family: "Jost", sans-serif;
-    border-radius: 10px;
+    border-radius: 6px;
   }
   button {
     margin-left: 10px;
+    height: 56px;
+    position: fixed;
   }
 }
 
 #showAddComment {
-  border-radius: 30px;
+  border-radius: 6px;
   margin: 10px;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   position: fixed;
   right: 0;
   bottom: 0;

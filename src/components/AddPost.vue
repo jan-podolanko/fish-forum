@@ -56,7 +56,7 @@ form {
     right: auto;
   }
   border: 3px solid black;
-  border-radius: 10px;
+  border-radius: 6px;
   align-items: center;
   background-color: $light-mode-medium;
 }

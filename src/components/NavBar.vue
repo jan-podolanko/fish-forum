@@ -28,10 +28,16 @@ export default defineComponent({
       <RouterLink class="navLink" to="/">Home</RouterLink>
       <RouterLink class="navLink" to="/create">Create post</RouterLink>
       <RouterLink class="navLink" to="/register">Register</RouterLink>
-      <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">Login</RouterLink>
-      <button v-else id="logOut" @click="signOut" class="navLink">Sign out</button>
+      <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">
+        Login
+      </RouterLink>
+      <button v-else id="logOut" @click="signOut" class="navLink">
+        Sign out
+      </button>
     </li>
-    <div id="userData" v-if="user.loggedIn">Logged in as: {{ user.data.displayName }}</div>
+    <div id="userData" v-if="user.loggedIn">
+      Logged in as: {{ user.data.displayName }}
+    </div>
   </div>
 </template>
 
@@ -45,12 +51,6 @@ export default defineComponent({
   margin-left: 10px;
   margin-right: 10px;
 }
-header {
-  background-color: $light-mode-light;
-  color: $on-light-mode;
-  height: 80px;
-  margin-bottom: 10px;
-}
 .navLink {
   background-color: $primary;
   color: $on-primary;
@@ -62,7 +62,7 @@ header {
   }
   padding: 5px 10px;
   letter-spacing: 3px;
-  border-radius: 10px;
+  border-radius: 6px;
   text-decoration: none;
   border: 0;
   max-width: calc(100% - 20px);
@@ -74,9 +74,10 @@ header {
   width: calc(100% - 20px);
 }
 .navLink:hover {
-  background-color: $primary-dark;
+  background-color: darken($primary, 20%);
   color: $on-primary-dark;
   cursor: pointer;
+  outline: 2px solid white;
 }
 #navBar {
   list-style-type: none;
@@ -84,7 +85,7 @@ header {
   padding: 0;
   width: 25%;
   max-width: 250px;
-  background-color: $light-mode-light;
+  background-color: $primary-dark;
   height: 100%;
   position: fixed;
   overflow: auto;
@@ -96,6 +97,7 @@ header {
     top: 30px;
     left: 15px;
   }
+  color: $on-primary-dark;
 }
 #logoFish {
   text-align: center;

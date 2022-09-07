@@ -30,12 +30,12 @@ export default {
     },
     upvotePost(post: string) {
       updateDoc(doc(db, "posts", post), {
-        rating: increment(1)
+        rating: increment(1),
       });
     },
     downvotePost(post: string) {
       updateDoc(doc(db, "posts", post), {
-        rating: increment(-1)
+        rating: increment(-1),
       });
     },
   },
@@ -45,7 +45,9 @@ export default {
 <template>
   <div id="postBody">
     <div id="postHeading">
-      <RouterLink id="postTitle" :to="'/comments/' + id" >{{ title }}</RouterLink>
+      <RouterLink id="postTitle" :to="'/comments/' + id">
+        {{ title }}
+      </RouterLink>
       <div id="ratingBox">
         <span id="rating"> rated {{ rating }}</span>
         <button
@@ -92,18 +94,18 @@ export default {
 
 #postBody {
   width: 90%;
-  border: 2px solid black;
-  border-radius: 10px;
-  background-color: $light-mode-medium;
+  border-radius: 6px;
+  background-color: darken($light-mode-light, 5%);
   margin: 15px;
+  border-right: 2px solid $on-light-mode;
+  border-bottom: 2px solid $on-light-mode;
 }
 #postHeading {
   background-color: $light-mode-light;
   position: relative;
   color: $on-light-mode;
   padding: 10px 10px 5px 10px;
-  border-radius: 10px;
-  border-bottom: 2px solid $on-light-mode;
+  border-radius: 6px;
 }
 #postContent {
   padding: 10px;
@@ -147,6 +149,7 @@ button:hover {
   margin: {
     left: 5px;
   }
+  font-size: 20px;
 }
 #expandButton {
   width: 40px;
