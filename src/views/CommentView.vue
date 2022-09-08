@@ -39,7 +39,7 @@ export default defineComponent({
             this.comments.push({
               postid: this.id,
               commentid: doc.id,
-              useremail: doc.data().useremail,
+              useremail: doc.data().email,
               username: doc.data().username,
               date: doc.data().date.toDate(),
               content: doc.data().content,
@@ -91,7 +91,7 @@ export default defineComponent({
 
 <template>
   <UserPost v-if="hasData" v-bind="post[0]" />
-  <AddCommentButton @click="changeVisibility" />
+  <AddCommentButton @click="changeVisibility" :symbol="symbol" />
   <AddCommentMenu v-show="!hidden" v-bind="post[0]" />
   <div id="sortBox">
     <span>Sort {{ comments.length }} comments: </span>

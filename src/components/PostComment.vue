@@ -2,6 +2,7 @@
 import { db } from "@/firebase/firebase";
 import { deleteDoc, doc, increment, updateDoc } from "@firebase/firestore";
 import { defineComponent } from "vue";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   props: {
@@ -14,8 +15,13 @@ export default defineComponent({
     rating: Number,
     upvoteby: Array,
   },
+  computed: {
+    ...mapGetters({
+      user: "user",
+    }),
+  },
   methods: {
-    deletePost() {
+    deleteComment() {
       //@ts-ignore
       deleteDoc(doc(db, "posts", this.postid, "comments", this.commentid));
     },
@@ -54,6 +60,14 @@ export default defineComponent({
           arrow_downward
         </button>
       </div>
+      <button
+        v-if="user.data.email == useremail"
+        @click="deleteComment()"
+        id="deleteButton"
+        class="material-symbols-outlined"
+      >
+        delete
+      </button>
       <div id="commentData">
         <div id="commentUsername">
           {{ username }}
@@ -121,5 +135,11 @@ export default defineComponent({
 #downvote {
   position: absolute;
   top: 35px;
+}
+#deleteButton {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 20;
 }
 </style>

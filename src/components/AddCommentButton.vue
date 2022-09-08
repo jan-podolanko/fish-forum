@@ -5,8 +5,10 @@ export default defineComponent({
   data() {
     return {
       hidden: true,
-      symbol: "add",
     };
+  },
+  props: {
+    symbol: String,
   },
 });
 </script>
