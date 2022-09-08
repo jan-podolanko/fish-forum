@@ -1,18 +1,15 @@
 <script lang="ts">
-import LoginForm from "@/components/LoginForm.vue";
-
+import EditAccount from "@/components/EditAccount.vue";
 export default {
   components: {
-    LoginForm,
+    EditAccount,
   },
 };
 </script>
 
 <template>
-  <LoginForm />
-  <div id="message">
-    <div>Don't have an account?</div>
-    <RouterLink id="link" to="/login">Register here</RouterLink>
+  <div>
+    <EditAccount />
   </div>
 </template>
 

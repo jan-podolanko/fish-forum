@@ -10,26 +10,35 @@ export default defineComponent({
         name: "",
         email: "",
         password: "",
+        confirmpassword: "",
       },
-      error: null,
+      error: "",
     };
   },
   methods: {
     submit() {
-      createUserWithEmailAndPassword(auth, this.form.email, this.form.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          updateProfile(user, {
-            displayName: this.form.name,
+      if (this.form.password === this.form.confirmpassword) {
+        createUserWithEmailAndPassword(
+          auth,
+          this.form.email,
+          this.form.password
+        )
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            updateProfile(user, {
+              displayName: this.form.name,
+            });
+            this.$router.push({
+              name: "home",
+            });
+          })
+          .catch((error) => {
+            this.error = error.message;
           });
-          this.$router.push({
-            name: "home",
-          });
-        })
-        .catch((error) => {
-          this.error = error.message;
-        });
+      } else {
+        this.error = "Passwords don't match.";
+      }
     },
   },
 });
@@ -59,18 +68,26 @@ export default defineComponent({
       v-model="form.password"
       placeholder="Password"
     />
+    <input
+      id="confirmPassword"
+      type="password"
+      required
+      minlength="6"
+      v-model="form.confirmpassword"
+      placeholder="Confirm password"
+    />
     <div id="buttons">
       <button id="submit" type="submit">Register</button>
     </div>
   </form>
-  <div v-if="error">{{ error }}</div>
+  <div id="errorMessage" v-if="error">{{ error }}</div>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/colors.scss";
 
 form {
-  max-width: 200px;
+  width: 200px;
   padding: 10px;
   margin: {
     top: 20%;
@@ -107,5 +124,21 @@ input:focus {
 #submit {
   font-size: 1.2em;
   padding: 3px 10px;
+}
+#errorMessage {
+  margin: {
+    top: 10px;
+    left: auto;
+    right: auto;
+  }
+  border: 3px solid rgb(131, 10, 10);
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(131, 10, 10);
+  color: white;
+  text-align: center;
+  width: 200px;
+  padding: 10px;
 }
 </style>

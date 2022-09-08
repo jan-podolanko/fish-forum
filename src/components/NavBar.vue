@@ -28,6 +28,7 @@ export default defineComponent({
       <RouterLink class="navLink" to="/">Home</RouterLink>
       <RouterLink class="navLink" to="/create">Create post</RouterLink>
       <RouterLink class="navLink" to="/register">Register</RouterLink>
+      <RouterLink class="navLink" to="/account">Account</RouterLink>
       <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">
         Login
       </RouterLink>

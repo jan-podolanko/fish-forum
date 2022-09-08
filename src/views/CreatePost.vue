@@ -20,6 +20,7 @@ export default defineComponent({
     <AddPost />
   </div>
   <div v-else id="notLoggedIn">
+    <div id="logo">🐟🐟🐟</div>
     <div>You are not logged in.</div>
     <RouterLink class="navLink" to="/login">Sign in here</RouterLink>
     <div>or</div>
@@ -61,5 +62,9 @@ export default defineComponent({
   background-color: $primary-dark;
   color: $on-primary-dark;
   cursor: pointer;
+}
+#logo {
+  font-size: 50px;
+  user-select: none;
 }
 </style>
