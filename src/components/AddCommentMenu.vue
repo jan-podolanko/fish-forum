@@ -23,6 +23,7 @@ export default defineComponent({
   },
   methods: {
     addComment() {
+      //@ts-ignore
       addDoc(collection(db, "posts", this.id, "comments"), {
         username: this.user.data.displayName,
         email: this.user.data.email,
