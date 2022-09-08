@@ -23,38 +23,50 @@ export default defineComponent({
   },
   methods: {
     changeName() {
-      updateProfile(auth.currentUser, {
-        displayName: this.form.name,
-      })
-        .then(() => {
-          // Profile updated!
-          // ...
+      if (auth.currentUser) {
+        updateProfile(auth.currentUser, {
+          displayName: this.form.name,
         })
-        .catch((error) => {
-          this.error = error.message;
-        });
-    },
-    changePicture() {
-      updateProfile(auth.currentUser, {
-        photoURL: this.pictureURL,
-      })
-        .then(() => {
-          // Profile updated!
-          // ...
-        })
-        .catch((error) => {
-          this.error = error.message;
-        });
-    },
-    changePassword() {
-      if (this.newPassword == this.confirmNewPassword) {
-        updatePassword(auth.currentUser, this.newPassword)
           .then(() => {
-            // Update successful.
+            // Profile updated!
+            // ...
           })
           .catch((error) => {
             this.error = error.message;
           });
+      } else {
+        this.error = "Unknown error.";
+      }
+    },
+    changePicture() {
+      if (auth.currentUser) {
+        updateProfile(auth.currentUser, {
+          photoURL: this.pictureURL,
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+          })
+          .catch((error) => {
+            this.error = error.message;
+          });
+      } else {
+        this.error = "Unknown error.";
+      }
+    },
+    changePassword() {
+      if (this.newPassword == this.confirmNewPassword) {
+        if (auth.currentUser) {
+          updatePassword(auth.currentUser, this.newPassword)
+            .then(() => {
+              // Update successful.
+            })
+            .catch((error) => {
+              this.error = error.message;
+            });
+        } else {
+          this.error = "Unknown error.";
+        }
       } else {
         this.error = "Passwords don't match.";
       }
@@ -62,14 +74,18 @@ export default defineComponent({
     deleteAccount() {
       let deletion = confirm("Are you sure you want to delete your account?");
       if (deletion) {
-        deleteUser(auth.currentUser)
-          .then(() => {
-            // User deleted.
-          })
-          .catch((error) => {
-            // An error ocurred
-            this.error = error.message;
-          });
+        if (auth.currentUser) {
+          deleteUser(auth.currentUser)
+            .then(() => {
+              // User deleted.
+            })
+            .catch((error) => {
+              // An error ocurred
+              this.error = error.message;
+            });
+        } else {
+          this.error = "Unknown error.";
+        }
       }
     },
   },

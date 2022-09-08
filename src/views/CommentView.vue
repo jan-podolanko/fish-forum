@@ -32,6 +32,7 @@ export default defineComponent({
   },
   methods: {
     getComments() {
+      //@ts-ignore
       onSnapshot(collection(db, "posts", this.id, "comments"), (querySnapshot) => {
           this.comments = [];
           querySnapshot.forEach((doc) => {
@@ -51,6 +52,7 @@ export default defineComponent({
       );
     },
     async getPost() {
+      //@ts-ignore
       await getDoc(doc(db, "posts", this.id)).then((result) => {
         this.post = [];
         this.post.push({

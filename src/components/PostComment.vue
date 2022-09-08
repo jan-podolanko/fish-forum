@@ -16,14 +16,17 @@ export default defineComponent({
   },
   methods: {
     deletePost() {
+      //@ts-ignore
       deleteDoc(doc(db, "posts", this.postid, "comments", this.commentid));
     },
     upvoteComment() {
+      //@ts-ignore
       updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
         rating: increment(1),
       });
     },
     downvoteComment() {
+      //@ts-ignore
       updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
         rating: increment(-1),
       });
