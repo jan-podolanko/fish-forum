@@ -36,7 +36,7 @@ button {
   font-family: "Jost", sans-serif;
 }
 button:hover {
-  background-color: $primary-dark;
+  background-color: darken($primary, 20%);
   color: $on-primary-dark;
   outline: 2px solid $on-primary-dark;
   cursor: pointer;

@@ -72,7 +72,7 @@ export default defineComponent({
     sortByRatingDesc(a: { rating: number }, b: { rating: number }) {
       return b.rating - a.rating;
     },
-  }
+  },
 });
 </script>
 
@@ -106,6 +106,8 @@ export default defineComponent({
   <div v-else id="notLoggedIn">
     <div>You are not logged in.</div>
     <RouterLink class="navLink" to="/login">Sign in here</RouterLink>
+    <div>or</div>
+    <RouterLink class="navLink" to="/register">Register</RouterLink>
   </div>
 </template>
 

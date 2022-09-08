@@ -58,7 +58,7 @@ form {
   border: 3px solid black;
   border-radius: 6px;
   align-items: center;
-  background-color: $light-mode-medium;
+  background-color: $light-mode-light;
 }
 form > * {
   font-family: "Jost", sans-serif;
@@ -68,12 +68,26 @@ form > * {
 }
 input {
   width: 90%;
+  border: 1px black solid;
+  border-radius: 6px;
+  padding: {
+    top: 3px;
+    left: 5px;
+    right: 5px;
+  }
 }
 textarea {
   width: 90%;
   height: 100px;
   resize: none;
+  border: 1px black solid;
   font-family: "Jost", sans-serif;
+  border-radius: 6px;
+  padding: {
+    top: 3px;
+    left: 5px;
+    right: 5px;
+  }
 }
 #submitButton {
   width: 50%;

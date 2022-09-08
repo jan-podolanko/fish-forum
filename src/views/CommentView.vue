@@ -1,5 +1,6 @@
 <script lang="ts">
 import AddCommentButton from "@/components/AddCommentButton.vue";
+import AddCommentMenu from "@/components/AddCommentMenu.vue";
 import PostComment from "@/components/PostComment.vue";
 import { db } from "@/firebase/firebase";
 import { collection, doc, getDoc, onSnapshot } from "@firebase/firestore";
@@ -11,12 +12,16 @@ export default defineComponent({
     return {
       comments: [] as any[],
       post: {} as any[],
+      hasData: false,
+      hidden: true,
+      symbol: "add",
     };
   },
   components: {
     PostComment,
     UserPost,
     AddCommentButton,
+    AddCommentMenu,
   },
   props: {
     id: String,
@@ -58,17 +63,72 @@ export default defineComponent({
           rating: result.data()?.rating,
           upvotedby: result.data()?.upvotedby,
         });
+        this.hasData = true;
         console.log(result.data());
       });
+    },
+    sortByDateAsc(a: { date: number }, b: { date: number }) {
+      return a.date - b.date;
+    },
+    sortByDateDesc(a: { date: number }, b: { date: number }) {
+      return b.date - a.date;
+    },
+    sortByRatingAsc(a: { rating: number }, b: { rating: number }) {
+      return a.rating - b.rating;
+    },
+    sortByRatingDesc(a: { rating: number }, b: { rating: number }) {
+      return b.rating - a.rating;
+    },
+    changeVisibility() {
+      this.hidden = !this.hidden;
+      this.symbol = this.symbol == "add" ? "close" : "add";
     },
   },
 });
 </script>
 
 <template>
-  <UserPost v-bind="post[0]" />
+  <UserPost v-if="hasData" v-bind="post[0]" />
+  <AddCommentButton @click="changeVisibility" />
+  <AddCommentMenu v-show="!hidden" v-bind="post[0]" />
+  <div id="sortBox">
+    <span>Sort {{ comments.length }} comments: </span>
+    <button class="sortButton" @click="comments.sort(sortByDateAsc)">
+      By date, ascending
+    </button>
+    <button class="sortButton" @click="comments.sort(sortByDateDesc)">
+      By date, descending
+    </button>
+    <button class="sortButton" @click="comments.sort(sortByRatingAsc)">
+      By rating, ascending
+    </button>
+    <button class="sortButton" @click="comments.sort(sortByRatingDesc)">
+      By rating, descending
+    </button>
+  </div>
   <div id="comments" v-for="comment in comments" :key="comment">
     <PostComment v-bind="comment" />
   </div>
-  <AddCommentButton v-bind="post[0]" />
 </template>
+
+<style>
+.sortButton {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#sortBox {
+  margin-left: 20px;
+}
+#showCommentWrapper {
+  position: relative;
+}
+#showAddComment {
+  border-radius: 6px;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+</style>

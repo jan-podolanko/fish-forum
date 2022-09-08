@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 import App from "./App.vue";
 import router from "./router";
 
@@ -7,13 +7,13 @@ export const store = createStore({
   state: {
     user: {
       loggedIn: false,
-      data: null
-    }
+      data: null,
+    },
   },
   getters: {
-    user (state) {
-      return state.user
-    }
+    user(state) {
+      return state.user;
+    },
   },
   mutations: {
     SET_LOGGED_IN(state, value) {
@@ -21,7 +21,7 @@ export const store = createStore({
     },
     SET_USER(state, data) {
       state.user.data = data;
-    }
+    },
   },
   actions: {
     fetchUser({ commit }, user) {
@@ -29,15 +29,14 @@ export const store = createStore({
       if (user) {
         commit("SET_USER", {
           displayName: user.displayName,
-          email: user.email
+          email: user.email,
         });
       } else {
         commit("SET_USER", null);
       }
-    }
-  }
-})
-
+    },
+  },
+});
 
 const app = createApp(App);
 

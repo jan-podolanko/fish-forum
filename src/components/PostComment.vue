@@ -35,25 +35,29 @@ export default defineComponent({
 <template>
   <div id="comment">
     <div id="commentHeading">
-      <div id="commentUsername">
-        {{ username }}
-      </div>
       <div id="ratingBox">
-        <span id="rating"> rated {{ rating }}</span>
         <button
           @click="upvoteComment()"
           class="material-symbols-outlined voteButton"
+          id="upvote"
         >
           arrow_upward
         </button>
         <button
           @click="downvoteComment()"
           class="material-symbols-outlined voteButton"
+          id="downvote"
         >
           arrow_downward
         </button>
       </div>
-      <div id="commentDate">Posted on: {{ date }}</div>
+      <div id="commentData">
+        <div id="commentUsername">
+          {{ username }}
+        </div>
+        <span id="rating"> Comment rated {{ rating }}</span>
+        <div id="commentDate">Posted on: {{ date }}</div>
+      </div>
     </div>
     <div id="commentContent">
       {{ content }}
@@ -65,7 +69,6 @@ export default defineComponent({
 @import "../assets/colors.scss";
 
 #comment {
-  width: 90%;
   background-color: $light-mode-light;
   margin: 15px;
   border-radius: 6px;
@@ -81,21 +84,39 @@ export default defineComponent({
 }
 #commentUsername {
   font-weight: bold;
+  width: fit-content;
+  float: left;
+  display: inline;
+}
+#commentData {
+  position: relative;
+  left: 35px;
+  width: calc(100% - 50px);
 }
 #commentDate {
   font-size: small;
+  clear: left;
 }
 #commentContent {
   padding: 10px;
+  position: relative;
 }
 #rating {
   font-size: small;
+  margin-left: 10px;
 }
 .voteButton {
-  display: inline;
-  margin: {
-    left: 5px;
-  }
   font-size: 18px;
+}
+#ratingBox {
+  float: left;
+  display: inline;
+}
+#upvote {
+  position: absolute;
+}
+#downvote {
+  position: absolute;
+  top: 35px;
 }
 </style>

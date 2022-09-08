@@ -44,25 +44,27 @@ export default {
 
 <template>
   <div id="postBody">
+    <div id="ratingBox">
+      <button
+        @click="upvotePost(id)"
+        class="material-symbols-outlined voteButton"
+        id="upvote"
+      >
+        arrow_upward
+      </button>
+      <div id="rating">{{ rating }}</div>
+      <button
+        @click="downvotePost(id)"
+        class="material-symbols-outlined voteButton"
+        id="downvote"
+      >
+        arrow_downward
+      </button>
+    </div>
     <div id="postHeading">
       <RouterLink id="postTitle" :to="'/comments/' + id">
         {{ title }}
       </RouterLink>
-      <div id="ratingBox">
-        <span id="rating"> rated {{ rating }}</span>
-        <button
-          @click="upvotePost(id)"
-          class="material-symbols-outlined voteButton"
-        >
-          arrow_upward
-        </button>
-        <button
-          @click="downvotePost(id)"
-          class="material-symbols-outlined voteButton"
-        >
-          arrow_downward
-        </button>
-      </div>
       <div id="postDetails">
         <button
           id="expandButton"
@@ -93,12 +95,12 @@ export default {
 @import "../assets/colors.scss";
 
 #postBody {
-  width: 90%;
   border-radius: 6px;
-  background-color: darken($light-mode-light, 5%);
+  width: auto;
+  background-color: $light-mode-light;
   margin: 15px;
-  border-right: 2px solid $on-light-mode;
   border-bottom: 2px solid $on-light-mode;
+  border-right: 2px solid $on-light-mode;
 }
 #postHeading {
   background-color: $light-mode-light;
@@ -106,6 +108,8 @@ export default {
   color: $on-light-mode;
   padding: 10px 10px 5px 10px;
   border-radius: 6px;
+  left: 50px;
+  width: calc(100% - 70px);
 }
 #postContent {
   padding: 10px;
@@ -154,11 +158,25 @@ button:hover {
 #expandButton {
   width: 40px;
 }
-#rating {
-  vertical-align: top;
-}
+
 #ratingBox {
   margin-top: 3px;
   margin-bottom: 3px;
+  left: 20px;
+  position: absolute;
+}
+#upvote {
+  position: absolute;
+  top: 5px;
+}
+#rating {
+  position: absolute;
+  top: 30px;
+  text-align: center;
+  left: 16px;
+}
+#downvote {
+  position: absolute;
+  top: 55px;
 }
 </style>

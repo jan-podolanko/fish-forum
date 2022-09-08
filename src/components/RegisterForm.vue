@@ -81,7 +81,7 @@ form {
   border-radius: 6px;
   align-items: center;
   justify-content: center;
-  background-color: $light-mode-medium;
+  background-color: darken($light-mode-light, 5%);
 }
 form > * {
   font-family: "Jost", sans-serif;
