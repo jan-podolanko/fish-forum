@@ -170,10 +170,9 @@ button:hover {
   top: 5px;
 }
 #rating {
-  position: absolute;
-  top: 30px;
+  margin-top: 30px;
   text-align: center;
-  left: 16px;
+  width: 41px;
 }
 #downvote {
   position: absolute;

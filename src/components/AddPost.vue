@@ -30,6 +30,10 @@ export default defineComponent({
         date: Timestamp.now(),
         rating: 0,
         upvotedby: [],
+      }).then(() => {
+        this.$router.replace({
+          name: "home",
+        });
       });
     },
   },

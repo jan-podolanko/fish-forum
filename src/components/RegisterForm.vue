@@ -50,6 +50,7 @@ export default defineComponent({
       id="name"
       type="name"
       required
+      minlength="4"
       v-model="form.name"
       placeholder="Name"
     />
