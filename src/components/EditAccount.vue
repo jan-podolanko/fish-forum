@@ -142,11 +142,12 @@ export default defineComponent({
 @import "../assets/colors.scss";
 
 #box {
-  margin-top: 20%;
+  margin-top: 10%;
   text-align: center;
 }
 form {
-  width: 200px;
+  width: 300px;
+  font-size: 1.5em;
   padding: 10px;
   margin: {
     top: 10px;
@@ -157,7 +158,7 @@ form {
   border-radius: 6px;
   align-items: center;
   justify-content: center;
-  background-color: darken($light-mode-light, 5%);
+  background-color: $light-mode-light;
 }
 form > * {
   font-family: "Jost", sans-serif;
@@ -180,7 +181,8 @@ input:focus {
   margin: auto;
   text-align: center;
   button {
-    font-size: large;
+    font-size: 1.2em;
+    padding: 5px 10px;
   }
 }
 #errorMessage {
@@ -200,7 +202,8 @@ input:focus {
   padding: 10px;
 }
 #userData {
-  width: 200px;
+  width: 300px;
+  font-size: 1.5em;
   padding: 10px;
   margin: {
     top: 10px;
@@ -212,7 +215,7 @@ input:focus {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: darken($light-mode-light, 5%);
+  background-color: $light-mode-light;
 }
 #deleteButton {
   background-color: rgb(131, 10, 10);
@@ -223,6 +226,7 @@ input:focus {
     left: auto;
     right: auto;
   }
+  font-size: 1.5em;
 }
 #deleteButton:hover {
   background-color: lighten(rgb(131, 10, 10), 10%);

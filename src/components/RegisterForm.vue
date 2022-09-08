@@ -48,6 +48,10 @@ export default defineComponent({
 
 <template>
   <form @submit.prevent="submit">
+    <div id="websiteName">
+      Sign up to <br />
+      Fish Forum <br />🐟🐟🐟
+    </div>
     <input
       id="name"
       type="name"
@@ -77,7 +81,7 @@ export default defineComponent({
       required
       minlength="6"
       v-model="form.confirmpassword"
-      placeholder="Confirm password"
+      placeholder="Confirm Password"
     />
     <div id="buttons">
       <button id="submit" type="submit">Register</button>
@@ -89,11 +93,16 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "../assets/colors.scss";
 
+#websiteName {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 50px;
+}
 form {
-  width: 200px;
+  width: 300px;
   padding: 10px;
   margin: {
-    top: 20%;
+    top: 15%;
     left: auto;
     right: auto;
   }
@@ -101,11 +110,11 @@ form {
   border-radius: 6px;
   align-items: center;
   justify-content: center;
-  background-color: darken($light-mode-light, 5%);
+  background-color: $light-mode-light;
 }
 form > * {
   font-family: "Jost", sans-serif;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 input {
   margin: 10px auto;
@@ -126,7 +135,7 @@ input:focus {
 }
 #submit {
   font-size: 1.2em;
-  padding: 3px 10px;
+  padding: 5px 10px;
 }
 #errorMessage {
   margin: {
@@ -141,7 +150,8 @@ input:focus {
   background-color: rgb(131, 10, 10);
   color: white;
   text-align: center;
-  width: 200px;
+  width: 300px;
+  font-size: 1.5em;
   padding: 10px;
 }
 </style>

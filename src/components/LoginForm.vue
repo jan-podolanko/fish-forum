@@ -31,6 +31,11 @@ export default defineComponent({
 
 <template>
   <form @submit.prevent="submit">
+    <div id="websiteName">
+      Sign into <br />
+      Fish Forum <br />
+      🐟🐟🐟
+    </div>
     <input
       id="email"
       type="email"
@@ -54,12 +59,17 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "../assets/colors.scss";
-
+#websiteName {
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 50px;
+}
 form {
-  max-width: 200px;
+  width: 300px;
+  font-size: 1.5em;
   padding: 10px;
   margin: {
-    top: 20%;
+    top: 10%;
     left: auto;
     right: auto;
   }
@@ -67,7 +77,7 @@ form {
   border-radius: 6px;
   align-items: center;
   justify-content: center;
-  background-color: darken($light-mode-light, 5%);
+  background-color: $light-mode-light;
 }
 form > * {
   font-family: "Jost", sans-serif;

@@ -29,9 +29,10 @@ export default {
   border-radius: 6px;
   align-items: center;
   justify-content: center;
-  background-color: darken($light-mode-light, 5%);
+  background-color: $light-mode-light;
   text-align: center;
-  width: 200px;
+  width: 300px;
+  font-size: 1.5em;
   padding: 10px;
 }
 </style>

@@ -42,6 +42,7 @@ export default defineComponent({
 
 <template>
   <form @submit.prevent="submit">
+    <div id="postHeader">Create a Post:</div>
     <input required v-model="form.title" placeholder="Title" />
     <textarea required v-model="form.content" placeholder="Post content" />
     <button id="submitButton">Submit</button>
@@ -50,9 +51,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "../assets/colors.scss";
-
+#postHeader {
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 50px;
+}
 form {
-  width: 250px;
+  width: 400px;
+  font-size: 1.5em;
   padding: 10px;
   margin: {
     top: 20%;
@@ -96,6 +102,5 @@ textarea {
 #submitButton {
   width: 50%;
   font-size: 1.2em;
-  height: 30px;
 }
 </style>

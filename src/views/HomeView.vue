@@ -132,7 +132,6 @@ button:hover {
   background-color: $primary-dark;
   color: $on-primary-dark;
   cursor: pointer;
-  outline: 2px solid $on-primary-dark;
 }
 span {
   margin-left: 10px;
