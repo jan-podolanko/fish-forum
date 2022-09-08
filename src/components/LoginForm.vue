@@ -49,7 +49,7 @@ export default defineComponent({
       <button id="submit" type="submit">Login</button>
     </div>
   </form>
-  <div v-if="error">{{ error }}</div>
+  <div id="errorMessage" v-if="error">{{ error }}</div>
 </template>
 
 <style scoped lang="scss">
@@ -93,5 +93,21 @@ input:focus {
 #submit {
   font-size: 1.2em;
   padding: 3px 10px;
+}
+#errorMessage {
+  margin: {
+    top: 10px;
+    left: auto;
+    right: auto;
+  }
+  border: 3px solid rgb(131, 10, 10);
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(131, 10, 10);
+  color: white;
+  text-align: center;
+  width: 200px;
+  padding: 10px;
 }
 </style>

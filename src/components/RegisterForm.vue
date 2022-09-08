@@ -23,15 +23,17 @@ export default defineComponent({
           this.form.email,
           this.form.password
         )
-          .then((userCredential) => {
+          .then(() => {
             // Signed in
-            const user = userCredential.user;
-            updateProfile(user, {
-              displayName: this.form.name,
-            });
-            this.$router.push({
-              name: "home",
-            });
+            const user = auth.currentUser;
+            if (user) {
+              updateProfile(user, {
+                displayName: this.form.name,
+              });
+              this.$router.push({
+                name: "home",
+              });
+            }
           })
           .catch((error) => {
             this.error = error.message;

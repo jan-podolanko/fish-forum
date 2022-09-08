@@ -41,4 +41,7 @@ button:hover {
   outline: 2px solid $on-primary-dark;
   cursor: pointer;
 }
+form {
+  z-index: 30;
+}
 </style>

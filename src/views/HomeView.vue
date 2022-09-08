@@ -40,6 +40,7 @@ export default defineComponent({
           });
           console.log(doc.data());
         });
+        this.posts.sort(this.sortByDateDesc);
       });
     },
     sortByDateAsc(a: { date: number }, b: { date: number }) {
@@ -79,17 +80,17 @@ export default defineComponent({
 <template>
   <div v-if="user.loggedIn">
     <span>Sort by: </span>
-    <button class="sortButton" @click="posts.sort(sortByTitleAsc)">
-      By title, ascending
-    </button>
-    <button class="sortButton" @click="posts.sort(sortByTitleDesc)">
-      By title, descending
-    </button>
     <button class="sortButton" @click="posts.sort(sortByDateAsc)">
       By date, ascending
     </button>
     <button class="sortButton" @click="posts.sort(sortByDateDesc)">
       By date, descending
+    </button>
+    <button class="sortButton" @click="posts.sort(sortByTitleAsc)">
+      By title, ascending
+    </button>
+    <button class="sortButton" @click="posts.sort(sortByTitleDesc)">
+      By title, descending
     </button>
     <button class="sortButton" @click="posts.sort(sortByRatingAsc)">
       By rating, ascending
