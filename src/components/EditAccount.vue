@@ -136,6 +136,13 @@ export default defineComponent({
     <button id="deleteButton" @click="deleteAccount()">Delete account</button>
     <div id="errorMessage" v-if="error">{{ error }}</div>
   </div>
+  <div v-else id="notLoggedIn">
+    <div id="logo">🐟🐟🐟</div>
+    <div>You are not logged in.</div>
+    <RouterLink class="navLink" to="/login">Sign in here</RouterLink>
+    <div>or</div>
+    <RouterLink class="navLink" to="/register">Register</RouterLink>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -231,5 +238,35 @@ input:focus {
 #deleteButton:hover {
   background-color: lighten(rgb(131, 10, 10), 10%);
   color: black;
+}
+#notLoggedIn {
+  margin: {
+    top: 20%;
+  }
+  text-align: center;
+  font-size: xx-large;
+}
+.navLink {
+  background-color: $primary;
+  color: $on-primary;
+  font-size: xx-large;
+  padding: 5px 10px;
+  letter-spacing: 3px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 0;
+  text-align: center;
+  display: block;
+  max-width: fit-content;
+  margin: auto;
+}
+.navLink:hover {
+  background-color: $primary-dark;
+  color: $on-primary-dark;
+  cursor: pointer;
+}
+#logo {
+  font-size: 50px;
+  user-select: none;
 }
 </style>
