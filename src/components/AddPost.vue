@@ -43,8 +43,13 @@ export default defineComponent({
 <template>
   <form @submit.prevent="submit">
     <div id="postHeader">Create a Post:</div>
-    <input required v-model="form.title" placeholder="Title" />
-    <textarea required v-model="form.content" placeholder="Post content" />
+    <input required v-model="form.title" maxlength="300" placeholder="Title" />
+    <textarea
+      required
+      v-model="form.content"
+      maxlength="40000"
+      placeholder="Post content"
+    />
     <button id="submitButton">Submit</button>
   </form>
 </template>

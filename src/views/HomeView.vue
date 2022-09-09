@@ -40,7 +40,6 @@ export default defineComponent({
             rating: doc.data().rating,
             upvotedby: doc.data().upvotedby,
           });
-          console.log(doc.data());
         });
         this.posts.sort(this.sortByDateDesc);
       });
