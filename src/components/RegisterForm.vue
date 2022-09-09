@@ -16,7 +16,7 @@ export default defineComponent({
     };
   },
   methods: {
-    submit() {
+    register() {
       if (this.form.password === this.form.confirmpassword) {
         createUserWithEmailAndPassword(
           auth,
@@ -24,7 +24,6 @@ export default defineComponent({
           this.form.password
         )
           .then(() => {
-            // Signed in
             const user = auth.currentUser;
             if (user) {
               updateProfile(user, {
@@ -47,7 +46,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="register">
     <div id="websiteName">
       Sign up to <br />
       Fish Forum <br />🐟🐟🐟
@@ -102,7 +101,7 @@ form {
   width: 300px;
   padding: 10px;
   margin: {
-    top: 15%;
+    top: 50px;
     left: auto;
     right: auto;
   }
@@ -134,12 +133,13 @@ input:focus {
   text-align: center;
 }
 #submit {
+  margin-top: 10px;
   font-size: 1.2em;
   padding: 5px 10px;
 }
 #errorMessage {
   margin: {
-    top: 10px;
+    top: 20px;
     left: auto;
     right: auto;
   }

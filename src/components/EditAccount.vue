@@ -72,7 +72,7 @@ export default defineComponent({
       }
     },
     deleteAccount() {
-      let deletion = confirm("Are you sure you want to delete your account?");
+      const deletion = confirm("Are you sure you want to delete your account?");
       if (deletion) {
         if (auth.currentUser) {
           deleteUser(auth.currentUser)
