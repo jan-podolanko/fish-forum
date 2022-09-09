@@ -13,6 +13,8 @@ export default defineComponent({
     return {
       posts: [] as any[],
       sorting: null,
+      filtering: "",
+      showFilter: false,
     };
   },
   computed: {
@@ -73,6 +75,9 @@ export default defineComponent({
     sortByRatingDesc(a: { rating: number }, b: { rating: number }) {
       return b.rating - a.rating;
     },
+    searchForPost() {
+      return this.posts.filter((post) => post.title.toLowerCase().includes(this.filtering));
+    },
   },
 });
 </script>
@@ -98,8 +103,15 @@ export default defineComponent({
     <button class="sortButton" @click="posts.sort(sortByRatingDesc)">
       By rating, descending
     </button>
+    <button class="sortButton" @click="showFilter = !showFilter">
+      Search
+      <span class="material-symbols-outlined">search</span>
+    </button>
+    <div id="searchBox" v-show="showFilter">
+      <input id="search" v-model="filtering" />
+    </div>
     <main>
-      <div v-for="post1 in posts" :key="post1.id">
+      <div v-for="post1 in searchForPost()" :key="post1.id">
         <UserPost v-bind="post1" />
       </div>
     </main>
@@ -127,6 +139,12 @@ button {
   color: $on-primary;
   border: 0;
   vertical-align: center;
+  font-size: medium;
+}
+button > span {
+  font-size: medium;
+  margin-left: 0;
+  vertical-align: -2.8px;
 }
 button:hover {
   background-color: $primary-dark;
@@ -134,7 +152,7 @@ button:hover {
   cursor: pointer;
 }
 span {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 #notLoggedIn {
   margin: {
@@ -165,5 +183,27 @@ span {
 #logo {
   font-size: 50px;
   user-select: none;
+}
+#search {
+  border: 0;
+  border-bottom: 2px solid $primary;
+  background-color: $light-mode-light;
+  display: inline-block;
+  outline: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Jost", sans-serif;
+  font-size: large;
+}
+#searchBox {
+  padding: 10px;
+  display: block;
+  text-align: center;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  border-radius: 6px;
+  width: auto;
+  background-color: $light-mode-light;
+  margin: 15px;
 }
 </style>
