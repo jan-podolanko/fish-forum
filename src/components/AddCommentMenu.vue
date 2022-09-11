@@ -44,6 +44,7 @@ export default defineComponent({
     <textarea
       id="commentContent"
       required
+      maxlength="10000"
       v-model="form.content"
       placeholder="Comment here"
     />

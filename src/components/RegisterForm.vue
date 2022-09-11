@@ -56,6 +56,7 @@ export default defineComponent({
       type="name"
       required
       minlength="4"
+      maxlength="30"
       v-model="form.name"
       placeholder="Name"
     />
@@ -63,6 +64,7 @@ export default defineComponent({
       id="email"
       type="email"
       required
+      maxlength="254"
       v-model="form.email"
       placeholder="E-mail"
     />

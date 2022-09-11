@@ -145,8 +145,8 @@ button:hover {
 }
 #deleteButton {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 7px;
+  top: 7px;
 }
 .voteButton {
   display: inline;

@@ -15,6 +15,8 @@ export default defineComponent({
       hasData: false,
       hidden: true,
       symbol: "add",
+      filtering: "",
+      showFilter: false,
     };
   },
   components: {
@@ -66,7 +68,7 @@ export default defineComponent({
           upvotedby: result.data()?.upvotedby,
         });
         this.hasData = true;
-        console.log(result.data());
+        this.comments.sort(this.sortByDateDesc);
       });
     },
     sortByDateAsc(a: { date: number }, b: { date: number }) {
@@ -84,6 +86,9 @@ export default defineComponent({
     changeVisibility() {
       this.hidden = !this.hidden;
       this.symbol = this.symbol == "add" ? "close" : "add";
+    },
+    searchForComment() {
+      return this.comments.filter((comment) => comment.content.toLowerCase().includes(this.filtering));
     },
   },
 });
@@ -107,13 +112,22 @@ export default defineComponent({
     <button class="sortButton" @click="comments.sort(sortByRatingDesc)">
       By rating, descending
     </button>
+    <button class="sortButton" @click="showFilter = !showFilter">
+      Search
+      <span id="searchSymbol" class="material-symbols-outlined">search</span>
+    </button>
+    <div id="searchBox" v-show="showFilter">
+      <input id="search" v-model="filtering" />
+    </div>
   </div>
-  <div id="comments" v-for="comment in comments" :key="comment">
+  <div id="comments" v-for="comment in searchForComment()" :key="comment">
     <PostComment v-bind="comment" />
   </div>
 </template>
 
-<style>
+<style lang="scss">
+@import "../assets/colors.scss";
+
 .sortButton {
   margin-left: 10px;
   margin-top: 10px;
@@ -132,5 +146,33 @@ export default defineComponent({
   position: absolute;
   right: 12px;
   bottom: 12px;
+}
+#searchSymbol {
+  font-size: 16px;
+  margin-left: 0;
+  vertical-align: -2.8px;
+}
+#search {
+  border: 0;
+  border-bottom: 2px solid $primary;
+  background-color: $light-mode-light;
+  display: inline-block;
+  outline: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Jost", sans-serif;
+  font-size: large;
+}
+#searchBox {
+  padding: 10px;
+  display: block;
+  text-align: center;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  border-radius: 6px;
+  width: auto;
+  background-color: $light-mode-light;
+  margin: 15px;
+  margin-left: 0;
 }
 </style>

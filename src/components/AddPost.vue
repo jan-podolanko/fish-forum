@@ -21,14 +21,14 @@ export default defineComponent({
     }),
   },
   methods: {
-    submit() {
+    addPost() {
       addDoc(collection(db, "posts"), {
         title: this.form.title,
         user: this.user.data.displayName,
         email: this.user.data.email,
         content: this.form.content,
         date: Timestamp.now(),
-        rating: 0,
+        rating: 1,
         upvotedby: [],
       }).then(() => {
         this.$router.replace({
@@ -41,10 +41,17 @@ export default defineComponent({
 </script>
 
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="addPost">
     <div id="postHeader">Create a Post:</div>
-    <input required v-model="form.title" maxlength="300" placeholder="Title" />
+    <input
+      id="postTitle"
+      required
+      v-model="form.title"
+      maxlength="300"
+      placeholder="Title"
+    />
     <textarea
+      id="postContent"
       required
       v-model="form.content"
       maxlength="40000"
