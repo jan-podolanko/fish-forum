@@ -1,6 +1,6 @@
-# vue-project
+# Fish Forum
 
-This template should help get you started developing with Vue 3 in Vite.
+Projekt zawarty w tym repozytorium jest celem pracy licencjackiej "Projekt strony internetowej (forum dyskusyjne)" Jana Podolanko.
 
 ## Recommended IDE Setup
 
