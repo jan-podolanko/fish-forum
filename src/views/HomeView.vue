@@ -39,6 +39,7 @@ export default defineComponent({
             email: doc.data().email,
             rating: doc.data().rating,
             upvotedby: doc.data().upvotedby,
+            downvotedby: doc.data().downvotedby,
           });
         });
         this.posts.sort(this.sortByDateDesc);

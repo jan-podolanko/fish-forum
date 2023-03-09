@@ -12,7 +12,7 @@ export default {
   <LoginForm />
   <div id="message">
     <div>Don't have an account?</div>
-    <RouterLink id="link" to="/login">Register here</RouterLink>
+    <RouterLink id="link" to="/register">Register here</RouterLink>
   </div>
 </template>
 

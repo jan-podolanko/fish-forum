@@ -1,6 +1,6 @@
 <script lang="ts">
 import { db } from "@/firebase/firebase";
-import { deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, deleteDoc, doc, getDoc, increment, updateDoc } from "firebase/firestore";
 import { mapGetters } from "vuex";
 
 export default {
@@ -23,21 +23,30 @@ export default {
     email: String,
     rating: Number,
     upvotedby: Array,
+    downvotedby: Array,
   },
   methods: {
     deletePost(post: string) {
       deleteDoc(doc(db, "posts", post));
     },
     upvotePost(post: string) {
-      updateDoc(doc(db, "posts", post), {
-        rating: increment(1),
+      if(!this.upvotedby.includes(this.user.data.id)){
+        updateDoc(doc(db, "posts", post), {
+          rating: increment(1),
+          upvotedby: arrayUnion(this.user.data.id),
+          downvotedby: arrayRemove(this.user.data.id)
       });
+      }
+      
     },
     downvotePost(post: string) {
-      updateDoc(doc(db, "posts", post), {
-        rating: increment(-1),
+      if(!this.downvotedby.includes(this.user.data.id)){
+        updateDoc(doc(db, "posts", post), {
+          rating: increment(-1),
+          downvotedby: arrayUnion(this.user.data.id),
+          upvotedby: arrayRemove(this.user.data.id)
       });
-    },
+    }},
   },
 };
 </script>
