@@ -1,6 +1,6 @@
 <script lang="ts">
 import { db } from "@/firebase/firebase";
-import { deleteDoc, doc, increment, updateDoc } from "@firebase/firestore";
+import { arrayRemove, arrayUnion, deleteDoc, doc, increment, updateDoc } from "@firebase/firestore";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 
@@ -13,7 +13,8 @@ export default defineComponent({
     date: Date,
     content: String,
     rating: Number,
-    upvoteby: Array,
+    upvotedby: Array,
+    downvotedby: Array,
   },
   computed: {
     ...mapGetters({
@@ -26,16 +27,22 @@ export default defineComponent({
       deleteDoc(doc(db, "posts", this.postid, "comments", this.commentid));
     },
     upvoteComment() {
-      //@ts-ignore
-      updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
-        rating: increment(1),
-      });
+      if(!this.upvotedby.includes(this.user.data.id)){
+        //@ts-ignore
+        updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
+          rating: increment(1),
+          upvotedby: arrayUnion(this.user.data.id),
+          downvotedby: arrayRemove(this.user.data.id),
+        })};
     },
     downvoteComment() {
-      //@ts-ignore
-      updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
-        rating: increment(-1),
-      });
+      if(!this.downvotedby.includes(this.user.data.id)){
+        //@ts-ignore
+        updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
+          rating: increment(-1),
+          downvotedby: arrayUnion(this.user.data.id),
+          upvotedby: arrayRemove(this.user.data.id),
+        })};
     },
   },
 });

@@ -47,6 +47,7 @@ export default defineComponent({
               content: doc.data().content,
               rating: doc.data().rating,
               upvotedby: doc.data().upvotedby,
+              downvotedby: doc.data().downvotedby,
             });
             console.log(doc.data());
           });

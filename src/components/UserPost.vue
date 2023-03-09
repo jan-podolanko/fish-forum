@@ -34,7 +34,7 @@ export default {
         updateDoc(doc(db, "posts", post), {
           rating: increment(1),
           upvotedby: arrayUnion(this.user.data.id),
-          downvotedby: arrayRemove(this.user.data.id)
+          downvotedby: arrayRemove(this.user.data.id),
       });
       }
       
@@ -44,7 +44,7 @@ export default {
         updateDoc(doc(db, "posts", post), {
           rating: increment(-1),
           downvotedby: arrayUnion(this.user.data.id),
-          upvotedby: arrayRemove(this.user.data.id)
+          upvotedby: arrayRemove(this.user.data.id),
       });
     }},
   },
