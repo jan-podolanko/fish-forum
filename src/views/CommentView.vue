@@ -49,7 +49,6 @@ export default defineComponent({
               upvotedby: doc.data().upvotedby,
               downvotedby: doc.data().downvotedby,
             });
-            console.log(doc.data());
           });
         }
       );
