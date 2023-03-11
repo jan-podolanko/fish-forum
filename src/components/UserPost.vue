@@ -30,7 +30,7 @@ export default {
       deleteDoc(doc(db, "posts", post));
     },
     upvotePost(post: string) {
-      if(!this.upvotedby.includes(this.user.data.id)){
+      if(!this.upvotedby?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(1),
           upvotedby: arrayUnion(this.user.data.id),
@@ -40,7 +40,7 @@ export default {
       
     },
     downvotePost(post: string) {
-      if(!this.downvotedby.includes(this.user.data.id)){
+      if(!this.downvotedby?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(-1),
           downvotedby: arrayUnion(this.user.data.id),

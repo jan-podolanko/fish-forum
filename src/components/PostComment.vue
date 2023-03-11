@@ -27,7 +27,7 @@ export default defineComponent({
       deleteDoc(doc(db, "posts", this.postid, "comments", this.commentid));
     },
     upvoteComment() {
-      if(!this.upvotedby.includes(this.user.data.id)){
+      if(!this.upvotedby?.includes(this.user.data.id)){
         //@ts-ignore
         updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
           rating: increment(1),
@@ -36,7 +36,7 @@ export default defineComponent({
         })};
     },
     downvoteComment() {
-      if(!this.downvotedby.includes(this.user.data.id)){
+      if(!this.downvotedby?.includes(this.user.data.id)){
         //@ts-ignore
         updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
           rating: increment(-1),
