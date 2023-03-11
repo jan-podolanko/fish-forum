@@ -26,10 +26,10 @@ export default {
     downvotedby: Array,
   },
   methods: {
-    deletePost(post: string) {
+    deletePost(post: string): void {
       deleteDoc(doc(db, "posts", post));
     },
-    upvotePost(post: string) {
+    upvotePost(post: string): void {
       if(!this.upvotedby?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(1),
@@ -39,7 +39,7 @@ export default {
       }
       
     },
-    downvotePost(post: string) {
+    downvotePost(post: string): void {
       if(!this.downvotedby?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(-1),
