@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyDuIdgueIEXj0p4WBkwnI3S4STeTKZHZFs",
+  apiKey: "AIzaSyBKd1uUD21QfQ3rOfR2IDT1zsBFmd57b_A",
   authDomain: "vue-forum-43382.firebaseapp.com",
   projectId: "vue-forum-43382",
   storageBucket: "vue-forum-43382.appspot.com",
