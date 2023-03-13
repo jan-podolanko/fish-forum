@@ -1,4 +1,5 @@
 <script lang="ts">
+import NotLoggedIn from "@/components/NotLoggedIn.vue";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 import AddPost from "../components/AddPost.vue";
@@ -6,7 +7,8 @@ import AddPost from "../components/AddPost.vue";
 export default defineComponent({
   components: {
     AddPost,
-  },
+    NotLoggedIn
+},
   computed: {
     ...mapGetters({
       user: "user",
@@ -20,11 +22,7 @@ export default defineComponent({
     <AddPost />
   </div>
   <div v-else id="not-logged-in">
-    <div id="logo">🐟🐟🐟</div>
-    <div>You are not logged in.</div>
-    <RouterLink class="nav-link" to="/login">Sign in here</RouterLink>
-    <div>or</div>
-    <RouterLink class="nav-link" to="/register">Register</RouterLink>
+    <NotLoggedIn />
   </div>
 </template>
 

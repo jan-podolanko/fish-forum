@@ -48,6 +48,7 @@ export default defineComponent({
               rating: doc.data().rating,
               upvotedby: doc.data().upvotedby,
               downvotedby: doc.data().downvotedby,
+              homeView: false,
             });
           });
         }
@@ -98,25 +99,25 @@ export default defineComponent({
   <UserPost v-if="hasData" v-bind="post[0]" />
   <AddCommentButton @click="changeVisibility" :symbol="symbol" />
   <AddCommentMenu v-show="!hidden" v-bind="post[0]" />
-  <div id="sortBox">
+  <div id="sort-box">
     <span>Sort {{ comments.length }} comments: </span>
-    <button class="sortButton" @click="comments.sort(sortByDateAsc)">
+    <button class="sort-button" @click="comments.sort(sortByDateAsc)">
       By date, ascending
     </button>
-    <button class="sortButton" @click="comments.sort(sortByDateDesc)">
+    <button class="sort-button" @click="comments.sort(sortByDateDesc)">
       By date, descending
     </button>
-    <button class="sortButton" @click="comments.sort(sortByRatingAsc)">
+    <button class="sort-button" @click="comments.sort(sortByRatingAsc)">
       By rating, ascending
     </button>
-    <button class="sortButton" @click="comments.sort(sortByRatingDesc)">
+    <button class="sort-button" @click="comments.sort(sortByRatingDesc)">
       By rating, descending
     </button>
-    <button class="sortButton" @click="showFilter = !showFilter">
+    <button class="sort-button" @click="showFilter = !showFilter">
       Search
-      <span id="searchSymbol" class="material-symbols-outlined">search</span>
+      <span id="search-symbol" class="material-symbols-outlined">search</span>
     </button>
-    <div id="searchBox" v-show="showFilter">
+    <div id="search-box" v-show="showFilter">
       <input id="search" v-model="filtering" />
     </div>
   </div>
@@ -128,26 +129,14 @@ export default defineComponent({
 <style lang="scss">
 @import "../assets/colors.scss";
 
-.sortButton {
+.sort-button {
   margin-left: 10px;
   margin-top: 10px;
 }
-#sortBox {
+#sort-box {
   margin-left: 20px;
 }
-#showCommentWrapper {
-  position: relative;
-}
-#showAddComment {
-  border-radius: 6px;
-  margin: 10px;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-}
-#searchSymbol {
+#search-symbol {
   font-size: 16px;
   margin-left: 0;
   vertical-align: -2.8px;
@@ -163,7 +152,7 @@ export default defineComponent({
   font-family: "Jost", sans-serif;
   font-size: large;
 }
-#searchBox {
+#search-box {
   padding: 10px;
   display: block;
   text-align: center;

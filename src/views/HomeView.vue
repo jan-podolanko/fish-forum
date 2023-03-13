@@ -1,5 +1,6 @@
 <script lang="ts">
 import UserPost from "@/components/UserPost.vue";
+import NotLoggedIn from "@/components/NotLoggedIn.vue";
 import { collection, onSnapshot } from "firebase/firestore";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
@@ -8,6 +9,7 @@ import { db } from "../firebase/firebase";
 export default defineComponent({
   components: {
     UserPost,
+    NotLoggedIn,
   },
   data() {
     return {
@@ -40,6 +42,7 @@ export default defineComponent({
             rating: doc.data().rating,
             upvotedby: doc.data().upvotedby,
             downvotedby: doc.data().downvotedby,
+            homeView: true,
           });
         });
         this.posts.sort(this.sortByDateDesc);
@@ -85,29 +88,30 @@ export default defineComponent({
 <template>
   <div v-if="user.loggedIn">
     <span>Sort by: </span>
-    <button class="sortButton" @click="posts.sort(sortByDateAsc)">
+    <button class="sort-button" @click="posts.sort(sortByDateAsc)">
       By date, ascending
     </button>
-    <button class="sortButton" @click="posts.sort(sortByDateDesc)">
+    <button class="sort-button" @click="posts.sort(sortByDateDesc)">
       By date, descending
     </button>
-    <button class="sortButton" @click="posts.sort(sortByTitleAsc)">
+    <button class="sort-button" @click="posts.sort(sortByTitleAsc)">
       By title, ascending
     </button>
-    <button class="sortButton" @click="posts.sort(sortByTitleDesc)">
+    <button class="sort-button" @click="posts.sort(sortByTitleDesc)">
       By title, descending
     </button>
-    <button class="sortButton" @click="posts.sort(sortByRatingAsc)">
+    <button class="sort-button" @click="posts.sort(sortByRatingAsc)">
       By rating, ascending
     </button>
-    <button class="sortButton" @click="posts.sort(sortByRatingDesc)">
+    <button class="sort-button" @click="posts.sort(sortByRatingDesc)">
       By rating, descending
     </button>
-    <button class="sortButton" @click="showFilter = !showFilter">
+    <button class="sort-button" @click="showFilter = !showFilter">
       Search
       <span class="material-symbols-outlined">search</span>
     </button>
     <div id="search-box" v-show="showFilter">
+      <div>Search:</div>
       <input id="search" v-model="filtering" />
     </div>
     <main>
@@ -117,18 +121,14 @@ export default defineComponent({
     </main>
   </div>
   <div v-else id="not-logged-in">
-    <div id="logo">🐟🐟🐟</div>
-    <div>You are not logged in.</div>
-    <RouterLink class="nav-link" to="/login">Sign in here</RouterLink>
-    <div>or</div>
-    <RouterLink class="nav-link" to="/register">Register</RouterLink>
+    <NotLoggedIn />
   </div>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/colors.scss";
 
-.sortButton {
+.sort-button {
   margin-left: 10px;
   margin-top: 10px;
   font-family: "Jost", sans-serif;
@@ -188,22 +188,23 @@ span {
   border: 0;
   border-bottom: 2px solid $primary;
   background-color: $light-mode-light;
-  display: inline-block;
   outline: 0;
-  width: 100%;
-  text-align: center;
   font-family: "Jost", sans-serif;
   font-size: large;
+  text-align: left;
+  margin-left: 10px;
+  width: 90%;
 }
 #search-box {
   padding: 10px;
   display: block;
-  text-align: center;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
   border-radius: 6px;
-  width: auto;
   background-color: $light-mode-light;
   margin: 15px;
+}
+#search-box > * {
+  display: inline;
 }
 </style>

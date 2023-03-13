@@ -28,6 +28,7 @@ export default defineComponent({
     rating: Number,
     upvotedby: Array,
     downvotedby: Array,
+    homeView: Boolean,
   },
   methods: {
     deletePost(post: string): void {
@@ -79,26 +80,32 @@ export default defineComponent({
         {{ title }}
       </RouterLink>
       <div id="post-details">
-        <button
-          id="expand-button"
-          class="material-symbols-outlined"
-          @click="postVisible = !postVisible"
-        >
-          <div v-if="!postVisible">expand_more</div>
-          <div v-else>expand_less</div>
-        </button>
+        <div v-if="homeView">
+          <button
+            id="expand-button"
+            class="material-symbols-outlined"
+            @click="postVisible = !postVisible"
+          >
+            <div v-if="!postVisible">expand_more</div>
+            <div v-else>expand_less</div>
+          </button>
+        </div>
         <div id="post-data">Posted {{ date }} by {{ author }}</div>
       </div>
       <button
         v-if="user.data.email == email"
         @click="deletePost(changedId)"
-        id="deleteButton"
-        class="material-symbols-outlined"
+        class="material-symbols-outlined delete-button"
       >
         delete
       </button>
     </div>
-    <div v-if="postVisible" id="post-content">
+    <div v-if="homeView" >
+      <div v-if="postVisible" class="post-content">
+        <div>{{ content }}</div>
+      </div>
+    </div>
+    <div v-else class="post-content">
       <div>{{ content }}</div>
     </div>
   </div>
@@ -120,11 +127,12 @@ export default defineComponent({
   position: relative;
   color: $on-light-mode;
   padding: 10px 10px 5px 10px;
+  margin-top: 7px;
   border-radius: 6px;
   left: 50px;
   width: calc(100% - 70px);
 }
-#post-content {
+.post-content {
   margin: 15px;
 }
 #post-title {
@@ -148,7 +156,7 @@ button:hover {
 }
 #post-data {
   font-size: 0.8em;
-  padding-left: 10px;
+  padding-left: 0px;
   vertical-align: top;
   width: calc(100% - 50px);
 }
@@ -158,13 +166,16 @@ button:hover {
 }
 #expand-button {
   width: 40px;
+  margin-right: 10px;
 }
 
-#deleteButton {
+.delete-button {
   position: absolute;
   right: 7px;
   top: 7px;
-  background-color: $danger;
+}
+.delete-button:hover {
+  background-color: $danger !important;
   color: white;
 }
 .voteButton {

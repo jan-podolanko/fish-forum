@@ -70,8 +70,7 @@ export default defineComponent({
       <button
         v-if="user.data.email == useremail"
         @click="deleteComment()"
-        id="delete-button"
-        class="material-symbols-outlined"
+        class="material-symbols-outlined delete-button"
       >
         delete
       </button>
@@ -143,10 +142,14 @@ export default defineComponent({
   position: absolute;
   top: 35px;
 }
-#delete-button {
+.delete-button {
   position: absolute;
   right: 10px;
   top: 10px;
   z-index: 20;
+}
+.delete-button:hover {
+  background-color: $danger !important;
+  color: white;
 }
 </style>
