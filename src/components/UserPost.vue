@@ -14,6 +14,9 @@ export default defineComponent({
     ...mapGetters({
       user: "user",
     }),
+    changedId(){
+      return this.id ? this.id : ""
+    }
   },
   props: {
     id: String,
@@ -56,7 +59,7 @@ export default defineComponent({
   <div id="postBody">
     <div id="ratingBox">
       <button
-        @click="upvotePost(id)"
+        @click="upvotePost(changedId)"
         class="material-symbols-outlined voteButton"
         id="upvote"
       >
@@ -64,7 +67,7 @@ export default defineComponent({
       </button>
       <div id="rating">{{ rating }}</div>
       <button
-        @click="downvotePost(id)"
+        @click="downvotePost(changedId)"
         class="material-symbols-outlined voteButton"
         id="downvote"
       >
@@ -88,7 +91,7 @@ export default defineComponent({
       </div>
       <button
         v-if="user.data.email == email"
-        @click="deletePost(id)"
+        @click="deletePost(changedId)"
         id="deleteButton"
         class="material-symbols-outlined"
       >
