@@ -56,38 +56,38 @@ export default defineComponent({
 </script>
 
 <template>
-  <div id="postBody">
-    <div id="ratingBox">
-      <button
-        @click="upvotePost(changedId)"
-        class="material-symbols-outlined voteButton"
-        id="upvote"
-      >
-        arrow_upward
-      </button>
-      <div id="rating">{{ rating }}</div>
-      <button
-        @click="downvotePost(changedId)"
-        class="material-symbols-outlined voteButton"
-        id="downvote"
-      >
-        arrow_downward
-      </button>
-    </div>
-    <div id="postHeading">
-      <RouterLink id="postTitle" :to="'/comments/' + id">
+  <div id="post-body">
+    <div class="rating-box">
+    <button
+      @click="upvotePost(changedId)"
+      class="material-symbols-outlined voteButton"
+      id="upvote"
+    >
+      arrow_upward
+    </button>
+    <div id="rating">{{ rating }}</div>
+    <button
+      @click="downvotePost(changedId)"
+      class="material-symbols-outlined voteButton"
+      id="downvote"
+    >
+      arrow_downward
+    </button>
+  </div>
+    <div id="post-heading">
+      <RouterLink id="post-title" :to="'/comments/' + id">
         {{ title }}
       </RouterLink>
-      <div id="postDetails">
+      <div id="post-details">
         <button
-          id="expandButton"
+          id="expand-button"
           class="material-symbols-outlined"
           @click="postVisible = !postVisible"
         >
           <div v-if="!postVisible">expand_more</div>
           <div v-else>expand_less</div>
         </button>
-        <div id="postData">Posted {{ date }} by {{ author }}</div>
+        <div id="post-data">Posted {{ date }} by {{ author }}</div>
       </div>
       <button
         v-if="user.data.email == email"
@@ -98,7 +98,7 @@ export default defineComponent({
         delete
       </button>
     </div>
-    <div v-if="postVisible" id="postContent">
+    <div v-if="postVisible" id="post-content">
       <div>{{ content }}</div>
     </div>
   </div>
@@ -107,7 +107,7 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "../assets/colors.scss";
 
-#postBody {
+#post-body {
   border-radius: 6px;
   width: auto;
   background-color: $light-mode-light;
@@ -115,7 +115,7 @@ export default defineComponent({
   border-bottom: 2px solid $on-light-mode;
   border-right: 2px solid $on-light-mode;
 }
-#postHeading {
+#post-heading {
   background-color: $light-mode-light;
   position: relative;
   color: $on-light-mode;
@@ -124,15 +124,15 @@ export default defineComponent({
   left: 50px;
   width: calc(100% - 70px);
 }
-#postContent {
-  padding: 10px;
+#post-content {
+  margin: 15px;
 }
-#postTitle {
+#post-title {
   font-size: 2em;
   color: black;
   text-decoration: none;
 }
-#postTitle:hover {
+#post-title:hover {
   color: $primary-dark;
 }
 button {
@@ -146,49 +146,41 @@ button:hover {
   color: $on-primary-dark;
   cursor: pointer;
 }
-#postData {
+#post-data {
   font-size: 0.8em;
-  display: inline-block;
   padding-left: 10px;
   vertical-align: top;
   width: calc(100% - 50px);
 }
-#postDetails {
-  width: 100%;
+#post-details > * {
+  display: inline-grid;
+  vertical-align: middle;
 }
+#expand-button {
+  width: 40px;
+}
+
 #deleteButton {
   position: absolute;
   right: 7px;
   top: 7px;
+  background-color: $danger;
+  color: white;
 }
 .voteButton {
-  display: inline;
-  margin: {
-    left: 5px;
-  }
   font-size: 20px;
 }
-#expandButton {
-  width: 40px;
+.rating-box {
+  margin-top: 7px;
+  margin-bottom: 3px;
+  left: 25px;
+  position: absolute;
+}
+.rating-box > * {
+  display: grid;
+  margin: 2px;
+  text-align: center;
+  vertical-align: middle;
 }
 
-#ratingBox {
-  margin-top: 3px;
-  margin-bottom: 3px;
-  left: 20px;
-  position: absolute;
-}
-#upvote {
-  position: absolute;
-  top: 5px;
-}
-#rating {
-  margin-top: 30px;
-  text-align: center;
-  width: 41px;
-}
-#downvote {
-  position: absolute;
-  top: 55px;
-}
 </style>

@@ -22,17 +22,17 @@ export default defineComponent({
 </script>
 
 <template>
-  <div id="navBar">
-    <div id="logoFish">🐟🐟🐟</div>
+  <div id="nav-bar">
+    <div id="logo-fish">🐟🐟🐟</div>
     <li>
-      <RouterLink class="navLink" to="/">Home</RouterLink>
-      <RouterLink class="navLink" to="/create">Create post</RouterLink>
-      <RouterLink class="navLink" to="/register">Register</RouterLink>
-      <RouterLink class="navLink" to="/account">Account</RouterLink>
-      <RouterLink v-if="!user.loggedIn" class="navLink" to="/login">
+      <RouterLink class="nav-link" to="/">Home</RouterLink>
+      <RouterLink class="nav-link" to="/create">Create post</RouterLink>
+      <RouterLink class="nav-link" to="/register">Register</RouterLink>
+      <RouterLink class="nav-link" to="/account">Account</RouterLink>
+      <RouterLink v-if="!user.loggedIn" class="nav-link" to="/login">
         Login
       </RouterLink>
-      <button v-else id="logOut" @click="signOut" class="navLink">
+      <button v-else id="logOut" @click="signOut" class="nav-link">
         Sign out
       </button>
     </li>
@@ -52,7 +52,7 @@ export default defineComponent({
   margin-left: 10px;
   margin-right: 10px;
 }
-.navLink {
+.nav-link {
   background-color: $primary;
   color: $on-primary;
   font-size: 25px;
@@ -74,13 +74,13 @@ export default defineComponent({
 #logOut {
   width: calc(100% - 20px);
 }
-.navLink:hover {
+.nav-link:hover {
   background-color: darken($primary, 20%);
   color: $on-primary-dark;
   cursor: pointer;
   outline: 2px solid white;
 }
-#navBar {
+#nav-bar {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -100,7 +100,7 @@ export default defineComponent({
   }
   color: $on-primary-dark;
 }
-#logoFish {
+#logo-fish {
   text-align: center;
   font-size: 36px;
   user-select: none;

@@ -42,7 +42,7 @@ export default defineComponent({
 
 <template>
   <form @submit.prevent="addPost">
-    <div id="postHeader">Create a Post:</div>
+    <div id="post-header">Create a Post:</div>
     <input
       id="postTitle"
       required
@@ -63,7 +63,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import "../assets/colors.scss";
-#postHeader {
+#post-header {
   font-size: 1.8em;
   text-align: center;
   margin-bottom: 50px;

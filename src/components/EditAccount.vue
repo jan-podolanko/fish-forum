@@ -94,7 +94,7 @@ export default defineComponent({
 
 <template>
   <div id="box" v-if="user.loggedIn">
-    <div id="userData">
+    <div id="user-data">
       <div>Logged in as: {{ user.data.displayName }}</div>
       <div>Email address: {{ user.data.email }}</div>
     </div>
@@ -135,15 +135,15 @@ export default defineComponent({
         <button @click="changePassword()">Submit</button>
       </div>
     </form>
-    <button id="deleteButton" @click="deleteAccount()">Delete account</button>
-    <div id="errorMessage" v-if="error">{{ error }}</div>
+    <button id="delete-button" @click="deleteAccount()">Delete account</button>
+    <div id="error-message" v-if="error">{{ error }}</div>
   </div>
-  <div v-else id="notLoggedIn">
+  <div v-else id="not-logged-in">
     <div id="logo">🐟🐟🐟</div>
     <div>You are not logged in.</div>
-    <RouterLink class="navLink" to="/login">Sign in here</RouterLink>
+    <RouterLink class="nav-link" to="/login">Sign in here</RouterLink>
     <div>or</div>
-    <RouterLink class="navLink" to="/register">Register</RouterLink>
+    <RouterLink class="nav-link" to="/register">Register</RouterLink>
   </div>
 </template>
 
@@ -194,7 +194,7 @@ input:focus {
     padding: 5px 10px;
   }
 }
-#errorMessage {
+#error-message {
   margin: {
     top: 10px;
     left: auto;
@@ -210,7 +210,7 @@ input:focus {
   width: 200px;
   padding: 10px;
 }
-#userData {
+#user-data {
   width: 300px;
   font-size: 1.5em;
   padding: 10px;
@@ -226,7 +226,7 @@ input:focus {
   text-align: center;
   background-color: $light-mode-light;
 }
-#deleteButton {
+#delete-button {
   background-color: rgb(131, 10, 10);
   color: white;
   padding: 10px;
@@ -237,18 +237,18 @@ input:focus {
   }
   font-size: 1.5em;
 }
-#deleteButton:hover {
+#delete-button:hover {
   background-color: lighten(rgb(131, 10, 10), 10%);
   color: black;
 }
-#notLoggedIn {
+#not-logged-in {
   margin: {
     top: 20%;
   }
   text-align: center;
   font-size: xx-large;
 }
-.navLink {
+.nav-link {
   background-color: $primary;
   color: $on-primary;
   font-size: xx-large;
@@ -262,7 +262,7 @@ input:focus {
   max-width: fit-content;
   margin: auto;
 }
-.navLink:hover {
+.nav-link:hover {
   background-color: $primary-dark;
   color: $on-primary-dark;
   cursor: pointer;

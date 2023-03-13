@@ -47,7 +47,7 @@ export default defineComponent({
 
 <template>
   <form @submit.prevent="register">
-    <div id="websiteName">
+    <div id="website-name">
       Sign up to <br />
       Fish Forum <br />🐟🐟🐟
     </div>
@@ -88,13 +88,13 @@ export default defineComponent({
       <button id="submit" type="submit">Register</button>
     </div>
   </form>
-  <div id="errorMessage" v-if="error">{{ error }}</div>
+  <div id="error-message" v-if="error">{{ error }}</div>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/colors.scss";
 
-#websiteName {
+#website-name {
   font-size: 2em;
   text-align: center;
   margin-bottom: 50px;
@@ -139,17 +139,17 @@ input:focus {
   font-size: 1.2em;
   padding: 5px 10px;
 }
-#errorMessage {
+#error-message {
   margin: {
     top: 20px;
     left: auto;
     right: auto;
   }
-  border: 3px solid rgb(131, 10, 10);
+  border: 3px solid $danger;
   border-radius: 6px;
   align-items: center;
   justify-content: center;
-  background-color: rgb(131, 10, 10);
+  background-color: $danger;
   color: white;
   text-align: center;
   width: 300px;

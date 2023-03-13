@@ -50,18 +50,18 @@ export default defineComponent({
 
 <template>
   <div id="comment">
-    <div id="commentHeading">
-      <div id="ratingBox">
+    <div id="comment-heading">
+      <div id="rating-box">
         <button
           @click="upvoteComment()"
-          class="material-symbols-outlined voteButton"
+          class="material-symbols-outlined vote-button"
           id="upvote"
         >
           arrow_upward
         </button>
         <button
           @click="downvoteComment()"
-          class="material-symbols-outlined voteButton"
+          class="material-symbols-outlined vote-button"
           id="downvote"
         >
           arrow_downward
@@ -70,20 +70,20 @@ export default defineComponent({
       <button
         v-if="user.data.email == useremail"
         @click="deleteComment()"
-        id="deleteButton"
+        id="delete-button"
         class="material-symbols-outlined"
       >
         delete
       </button>
-      <div id="commentData">
-        <div id="commentUsername">
+      <div id="comment-data">
+        <div id="comment-username">
           {{ username }}
         </div>
         <span id="rating"> Comment rated {{ rating }}</span>
-        <div id="commentDate">Posted on: {{ date }}</div>
+        <div id="comment-date">Posted on: {{ date }}</div>
       </div>
     </div>
-    <div id="commentContent">
+    <div id="comment-content">
       {{ content }}
     </div>
   </div>
@@ -99,29 +99,29 @@ export default defineComponent({
   border-right: 2px solid $on-light-mode;
   border-bottom: 2px solid $on-light-mode;
 }
-#commentHeading {
+#comment-heading {
   background-color: $light-mode-light;
   position: relative;
   color: $on-light-mode;
   padding: 10px 10px 5px 10px;
   border-radius: 6px;
 }
-#commentUsername {
+#comment-username {
   font-weight: bold;
   width: fit-content;
   float: left;
   display: inline;
 }
-#commentData {
+#comment-data {
   position: relative;
   left: 35px;
   width: calc(100% - 50px);
 }
-#commentDate {
+#comment-date {
   font-size: small;
   clear: left;
 }
-#commentContent {
+#comment-content {
   padding: 10px;
   position: relative;
 }
@@ -129,10 +129,10 @@ export default defineComponent({
   font-size: small;
   margin-left: 10px;
 }
-.voteButton {
+.vote-button {
   font-size: 18px;
 }
-#ratingBox {
+#rating-box {
   float: left;
   display: inline;
 }
@@ -143,7 +143,7 @@ export default defineComponent({
   position: absolute;
   top: 35px;
 }
-#deleteButton {
+#delete-button {
   position: absolute;
   right: 10px;
   top: 10px;

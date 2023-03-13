@@ -30,36 +30,45 @@ export default defineComponent({
 </script>
 
 <template>
-  <form @submit.prevent="submit">
-    <div id="websiteName">
-      Sign into <br />
-      Fish Forum <br />
-      🐟🐟🐟
+  <div class="centered-container">
+    <form @submit.prevent="submit">
+      <div id="website-name">
+        Sign into <br />
+        Fish Forum <br />
+        🐟🐟🐟
+      </div>
+      <input
+        id="email"
+        type="email"
+        required
+        v-model="form.email"
+        placeholder="E-mail"
+      />
+      <input
+        id="password"
+        type="password"
+        required
+        v-model="form.password"
+        placeholder="Password"
+      />
+      <div id="buttons">
+        <button id="submit" type="submit">Login</button>
+      </div>
+    </form>
+    <div class="message" id="error-message" v-if="error">{{ error }}</div>
+    <div class="message" id="message">
+      <div>Don't have an account?</div>
+      <RouterLink id="link" to="/register">Register here</RouterLink>
     </div>
-    <input
-      id="email"
-      type="email"
-      required
-      v-model="form.email"
-      placeholder="E-mail"
-    />
-    <input
-      id="password"
-      type="password"
-      required
-      v-model="form.password"
-      placeholder="Password"
-    />
-    <div id="buttons">
-      <button id="submit" type="submit">Login</button>
-    </div>
-  </form>
-  <div id="errorMessage" v-if="error">{{ error }}</div>
+  </div>
 </template>
 
 <style scoped lang="scss">
 @import "../assets/colors.scss";
-#websiteName {
+.centered-container {
+  position: relative;
+}
+#website-name {
   font-size: 1.8em;
   text-align: center;
   margin-bottom: 50px;
@@ -104,20 +113,27 @@ input:focus {
   font-size: 1.2em;
   padding: 3px 10px;
 }
-#errorMessage {
+#error-message {
+  border: 3px solid $danger;
+  background-color: $danger;
+  color: white;
+}
+#message {
+  border: 3px solid black;
+  background-color: $light-mode-light;
+}
+.message {
   margin: {
     top: 10px;
     left: auto;
     right: auto;
   }
-  border: 3px solid rgb(131, 10, 10);
   border-radius: 6px;
   align-items: center;
   justify-content: center;
-  background-color: rgb(131, 10, 10);
-  color: white;
   text-align: center;
-  width: 200px;
+  width: 300px;
+  font-size: 1.5em;
   padding: 10px;
 }
 </style>

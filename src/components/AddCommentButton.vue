@@ -14,18 +14,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <div id="showCommentWrapper">
-    <button id="showAddComment" class="material-symbols-outlined">
+  <div id="show-comment-wrapper">
+    <button id="show-add-comment" class="material-symbols-outlined">
       {{ symbol }}
     </button>
   </div>
 </template>
 
 <style>
-#showCommentWrapper {
+#show-comment-wrapper {
   position: relative;
 }
-#showAddComment {
+#show-add-comment {
   border-radius: 6px;
   margin: 10px;
   width: 40px;

@@ -19,12 +19,12 @@ export default defineComponent({
   <div v-if="user.loggedIn">
     <AddPost />
   </div>
-  <div v-else id="notLoggedIn">
+  <div v-else id="not-logged-in">
     <div id="logo">🐟🐟🐟</div>
     <div>You are not logged in.</div>
-    <RouterLink class="navLink" to="/login">Sign in here</RouterLink>
+    <RouterLink class="nav-link" to="/login">Sign in here</RouterLink>
     <div>or</div>
-    <RouterLink class="navLink" to="/register">Register</RouterLink>
+    <RouterLink class="nav-link" to="/register">Register</RouterLink>
   </div>
 </template>
 
@@ -37,14 +37,14 @@ export default defineComponent({
     align-items: center;
   }
 }
-#notLoggedIn {
+#not-logged-in {
   margin: {
     top: 20%;
   }
   text-align: center;
   font-size: xx-large;
 }
-.navLink {
+.nav-link {
   background-color: $primary;
   color: $on-primary;
   font-size: xx-large;
@@ -58,7 +58,7 @@ export default defineComponent({
   max-width: fit-content;
   margin: auto;
 }
-.navLink:hover {
+.nav-link:hover {
   background-color: $primary-dark;
   color: $on-primary-dark;
   cursor: pointer;

@@ -32,7 +32,6 @@ export default defineComponent({
         rating: 1,
         upvotedby: [],
       });
-      console.log(this.id);
     },
   },
 });
