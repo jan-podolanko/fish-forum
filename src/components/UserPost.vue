@@ -2,8 +2,9 @@
 import { db } from "@/firebase/firebase";
 import { arrayRemove, arrayUnion, deleteDoc, doc, increment, updateDoc } from "firebase/firestore";
 import { mapGetters } from "vuex";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   data() {
     return {
       postVisible: false,
@@ -30,25 +31,25 @@ export default {
       deleteDoc(doc(db, "posts", post));
     },
     upvotePost(post: string): void {
-      if(!(this as any).upvotedby?.includes((this as any).user.data.id)){
+      if(!this.upvotedby?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(1),
-          upvotedby: arrayUnion((this as any).user.data.id),
-          downvotedby: arrayRemove((this as any).user.data.id),
+          upvotedby: arrayUnion(this.user.data.id),
+          downvotedby: arrayRemove(this.user.data.id),
       });
       }
       
     },
     downvotePost(post: string): void {
-      if(!(this as any).downvotedby?.includes((this as any).user.data.id)){
+      if(!this.downvotedby?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(-1),
-          downvotedby: arrayUnion((this as any).user.data.id),
-          upvotedby: arrayRemove((this as any).user.data.id),
+          downvotedby: arrayUnion(this.user.data.id),
+          upvotedby: arrayRemove(this.user.data.id),
       });
     }},
   },
-};
+});
 </script>
 
 <template>
