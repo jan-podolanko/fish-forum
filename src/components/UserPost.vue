@@ -91,7 +91,7 @@ export default defineComponent({
             <div v-else>expand_less</div>
           </button>
         </div>
-        <div id="post-data">Posted {{ date }} by <RouterLink :to="'/user/'+userId">{{ author }}</RouterLink></div>
+        <div id="post-data">Posted {{ date }} by <RouterLink class="user-link" :to="'/user/'+userId">{{ author }}</RouterLink></div>
       </div>
       <button
         v-if="user.data.email == email"
@@ -162,7 +162,7 @@ button:hover {
   width: calc(100% - 50px);
 }
 #post-details > * {
-  display: inline-grid;
+  display: inline;
   vertical-align: middle;
 }
 #expand-button {
