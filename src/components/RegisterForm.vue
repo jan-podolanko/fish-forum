@@ -34,10 +34,11 @@ export default defineComponent({
                 name: "home",
               });
             }
+            //@ts-ignore
             setDoc(doc(db, "users", user.uid), {
               userName: this.form.name,
               userEmail: this.form.email,
-              userId: user.uid,
+              userId: user?.uid,
           });
           })
           .catch((error) => {

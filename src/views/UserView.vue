@@ -80,9 +80,10 @@ export default defineComponent({
         this.comments.sort(this.sortByDateDesc);
     },
     async getUser() {
+      //@ts-ignore
       await getDoc(doc(db, "users", this.userId)).then((result) => {
-        this.userName = result.data().userName;
-        this.userEmail = result.data().userEmail;
+        this.userName = result.data()?.userName;
+        this.userEmail = result.data()?.userEmail;
       });
     },
     sortByDateAsc(a: { date: number }, b: { date: number }) {
