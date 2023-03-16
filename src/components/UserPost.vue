@@ -16,7 +16,7 @@ export default defineComponent({
     }),
     changedId(){
       return this.id ? this.id : ""
-    }
+    },
   },
   props: {
     id: String,
@@ -25,9 +25,10 @@ export default defineComponent({
     date: Date,
     content: String,
     email: String,
+    userId: String,
     rating: Number,
-    upvotedby: Array,
-    downvotedby: Array,
+    upvotedBy: Array,
+    downvotedBy: Array,
     homeView: Boolean,
   },
   methods: {
@@ -35,23 +36,23 @@ export default defineComponent({
       deleteDoc(doc(db, "posts", post));
     },
     upvotePost(post: string): void {
-      if(!this.upvotedby?.includes(this.user.data.id)){
+      if(!this.upvotedBy?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(1),
-          upvotedby: arrayUnion(this.user.data.id),
-          downvotedby: arrayRemove(this.user.data.id),
-      });
-      }
-      
+          upvotedBy: arrayUnion(this.user.data.id),
+          downvotedBy: arrayRemove(this.user.data.id),
+        });
+      };
     },
     downvotePost(post: string): void {
-      if(!this.downvotedby?.includes(this.user.data.id)){
+      if(!this.downvotedBy?.includes(this.user.data.id)){
         updateDoc(doc(db, "posts", post), {
           rating: increment(-1),
-          downvotedby: arrayUnion(this.user.data.id),
-          upvotedby: arrayRemove(this.user.data.id),
-      });
-    }},
+          downvotedBy: arrayUnion(this.user.data.id),
+          upvotedBy: arrayRemove(this.user.data.id),
+        });
+      };
+    },
   },
 });
 </script>
@@ -90,7 +91,7 @@ export default defineComponent({
             <div v-else>expand_less</div>
           </button>
         </div>
-        <div id="post-data">Posted {{ date }} by {{ author }}</div>
+        <div id="post-data">Posted {{ date }} by <RouterLink :to="'/user/'+userId">{{ author }}</RouterLink></div>
       </div>
       <button
         v-if="user.data.email == email"

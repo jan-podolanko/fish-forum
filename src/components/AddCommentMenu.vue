@@ -23,14 +23,16 @@ export default defineComponent({
   },
   methods: {
     addComment() {
-      //@ts-ignore
-      addDoc(collection(db, "posts", this.id, "comments"), {
-        username: this.user.data.displayName,
-        email: this.user.data.email,
+      addDoc(collection(db, "comments"), {
+        postId: this.id,
+        userId: this.user.data.id,
+        userName: this.user.data.displayName,
+        userEmail: this.user.data.email,
         content: this.form.content,
         date: Timestamp.now(),
         rating: 1,
-        upvotedby: [],
+        upvotedBy: [],
+        downvotedBy: [],
       });
     },
   },

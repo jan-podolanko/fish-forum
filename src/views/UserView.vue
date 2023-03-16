@@ -1,22 +1,27 @@
 <script lang="ts">
 import UserPost from "@/components/UserPost.vue";
 import NotLoggedIn from "@/components/NotLoggedIn.vue";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 import { db } from "../firebase/firebase";
+import PostComment from "@/components/PostComment.vue";
 
 export default defineComponent({
   components: {
     UserPost,
     NotLoggedIn,
-  },
+    PostComment,
+},
   data() {
     return {
       posts: [] as any[],
+      comments: [] as any[],
       sorting: null,
       filtering: "",
       showFilter: false,
+      userName: "",
+      userEmail: "",
     };
   },
   computed: {
@@ -24,12 +29,17 @@ export default defineComponent({
       user: "user",
     }),
   },
+  props: {
+    userId: String,
+  },
   created() {
     this.getPosts();
+    this.getUser();
+    this.getComments();
   },
   methods: {
     getPosts() {
-      onSnapshot(collection(db, "posts"), (querySnapshot) => {
+      onSnapshot(query(collection(db, "posts"), where("userId", "==", this.userId)), (querySnapshot) => {
         this.posts = [];
         querySnapshot.forEach((doc) => {
           this.posts.push({
@@ -49,29 +59,37 @@ export default defineComponent({
         this.posts.sort(this.sortByDateDesc);
       });
     },
+    getComments() {
+      onSnapshot(query(collection(db, "comments"), where("userId", "==", this.userId)), (querySnapshot) => {
+        this.comments = [];
+          querySnapshot.forEach((doc) => {
+            this.comments.push({
+              postId: doc.data().postId,
+              commentId: doc.id,
+              userId: doc.data().userId,
+              userEmail: doc.data().userEmail,
+              userName: doc.data().userName,
+              date: doc.data().date.toDate(),
+              content: doc.data().content,
+              rating: doc.data().rating,
+              upvotedBy: doc.data().upvotedBy,
+              downvotedBy: doc.data().downvotedBy,
+            });
+          });
+        });
+        this.comments.sort(this.sortByDateDesc);
+    },
+    async getUser() {
+      await getDoc(doc(db, "users", this.userId)).then((result) => {
+        this.userName = result.data().userName;
+        this.userEmail = result.data().userEmail;
+      });
+    },
     sortByDateAsc(a: { date: number }, b: { date: number }) {
       return a.date - b.date;
     },
     sortByDateDesc(a: { date: number }, b: { date: number }) {
       return b.date - a.date;
-    },
-    sortByTitleAsc(a: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; },b: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; }){
-      if (a.title.toLowerCase().trim() < b.title.toLowerCase().trim()) {
-        return -1;
-      }
-      if (a.title.toLowerCase().trim() > b.title.toLowerCase().trim()) {
-        return 1;
-      }
-      return 0;
-    },
-    sortByTitleDesc(a: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; },b: { title: { toLowerCase: () => { (): any; new(): any; trim: { (): number; new(): any; }; }; }; }){
-      if (a.title.toLowerCase().trim() < b.title.toLowerCase().trim()) {
-        return 1;
-      }
-      if (a.title.toLowerCase().trim() > b.title.toLowerCase().trim()) {
-        return -1;
-      }
-      return 0;
     },
     sortByRatingAsc(a: { rating: number }, b: { rating: number }) {
       return a.rating - b.rating;
@@ -80,13 +98,17 @@ export default defineComponent({
       return b.rating - a.rating;
     },
     searchForPost() {
-      return this.posts.filter((post) => post.title.toLowerCase().includes(this.filtering) || post.content.toLowerCase().includes(this.filtering));
+      return this.posts.filter((post) => post.content.toLowerCase().includes(this.filtering) || post.title.toLowerCase().includes(this.filtering) );
+    },
+    searchForComment() {
+      return this.comments.filter((post) => post.content.toLowerCase().includes(this.filtering));
     },
   },
 });
 </script>
 
 <template>
+    <div> Posts by {{ userName }}</div>
   <div v-if="user.loggedIn">
     <span>Sort by: </span>
     <button class="sort-button" @click="posts.sort(sortByDateAsc)">
@@ -94,12 +116,6 @@ export default defineComponent({
     </button>
     <button class="sort-button" @click="posts.sort(sortByDateDesc)">
       By date, descending
-    </button>
-    <button class="sort-button" @click="posts.sort(sortByTitleAsc)">
-      By title, ascending
-    </button>
-    <button class="sort-button" @click="posts.sort(sortByTitleDesc)">
-      By title, descending
     </button>
     <button class="sort-button" @click="posts.sort(sortByRatingAsc)">
       By rating, ascending
@@ -118,6 +134,9 @@ export default defineComponent({
     <main>
       <div v-for="post1 in searchForPost()" :key="post1.id">
         <UserPost v-bind="post1" />
+      </div>
+      <div v-for="comment in searchForComment()" :key="comment.id">
+        <PostComment v-bind="comment" />
       </div>
     </main>
   </div>

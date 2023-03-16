@@ -28,3 +28,4 @@ coverage
 *.sw?
 
 src/assets/filters.ts
+src/assets/models.ts

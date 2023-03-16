@@ -24,12 +24,14 @@ export default defineComponent({
     addPost() {
       addDoc(collection(db, "posts"), {
         title: this.form.title,
-        user: this.user.data.displayName,
-        email: this.user.data.email,
+        userName: this.user.data.displayName,
+        userEmail: this.user.data.email,
+        userId: this.user.data.id,
         content: this.form.content,
         date: Timestamp.now(),
         rating: 1,
-        upvotedby: [],
+        upvotedBy: [],
+        downvotedBy: [],
       }).then(() => {
         this.$router.replace({
           name: "home",

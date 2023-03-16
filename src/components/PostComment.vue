@@ -6,15 +6,16 @@ import { mapGetters } from "vuex";
 
 export default defineComponent({
   props: {
-    postid: String,
-    commentid: String,
-    useremail: String,
-    username: String,
+    postId: String,
+    commentId: String,
+    userId: String,
+    userEmail: String,
+    userName: String,
     date: Date,
     content: String,
     rating: Number,
-    upvotedby: Array,
-    downvotedby: Array,
+    upvotedBy: Array,
+    downvotedBy: Array,
   },
   computed: {
     ...mapGetters({
@@ -24,24 +25,24 @@ export default defineComponent({
   methods: {
     deleteComment() {
       //@ts-ignore
-      deleteDoc(doc(db, "posts", this.postid, "comments", this.commentid));
+      deleteDoc(doc(db, "comments", this.commentId));
     },
     upvoteComment() {
-      if(!this.upvotedby?.includes(this.user.data.id)){
+      if(!this.upvotedBy?.includes(this.user.data.id)){
         //@ts-ignore
-        updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
+        updateDoc(doc(db, "comments", this.commentId), {
           rating: increment(1),
-          upvotedby: arrayUnion(this.user.data.id),
-          downvotedby: arrayRemove(this.user.data.id),
+          upvotedBy: arrayUnion(this.user.data.id),
+          downvotedBy: arrayRemove(this.user.data.id),
         })};
     },
     downvoteComment() {
-      if(!this.downvotedby?.includes(this.user.data.id)){
+      if(!this.downvotedBy?.includes(this.user.data.id)){
         //@ts-ignore
-        updateDoc(doc(db, "posts", this.postid, "comments", this.commentid), {
+        updateDoc(doc(db, "comments", this.commentId), {
           rating: increment(-1),
-          downvotedby: arrayUnion(this.user.data.id),
-          upvotedby: arrayRemove(this.user.data.id),
+          downvotedBy: arrayUnion(this.user.data.id),
+          upvotedBy: arrayRemove(this.user.data.id),
         })};
     },
   },
@@ -68,7 +69,7 @@ export default defineComponent({
         </button>
       </div>
       <button
-        v-if="user.data.email == useremail"
+        v-if="user.data.email == userEmail"
         @click="deleteComment()"
         class="material-symbols-outlined delete-button"
       >
@@ -76,7 +77,7 @@ export default defineComponent({
       </button>
       <div id="comment-data">
         <div id="comment-username">
-          {{ username }}
+          {{ userName }}
         </div>
         <span id="rating"> Comment rated {{ rating }}</span>
         <div id="comment-date">Posted on: {{ date }}</div>

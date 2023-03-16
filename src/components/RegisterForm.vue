@@ -1,7 +1,8 @@
 <script lang="ts">
+import { doc, setDoc } from "@firebase/firestore";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { defineComponent } from "vue";
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 
 export default defineComponent({
   data() {
@@ -33,6 +34,11 @@ export default defineComponent({
                 name: "home",
               });
             }
+            setDoc(doc(db, "users", user.uid), {
+              userName: this.form.name,
+              userEmail: this.form.email,
+              userId: user.uid,
+          });
           })
           .catch((error) => {
             this.error = error.message;

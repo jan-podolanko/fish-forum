@@ -3,7 +3,7 @@ import AddCommentButton from "@/components/AddCommentButton.vue";
 import AddCommentMenu from "@/components/AddCommentMenu.vue";
 import PostComment from "@/components/PostComment.vue";
 import { db } from "@/firebase/firebase";
-import { collection, doc, getDoc, onSnapshot } from "@firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, query, where } from "@firebase/firestore";
 import { defineComponent } from "vue";
 import UserPost from "../components/UserPost.vue";
 
@@ -34,25 +34,24 @@ export default defineComponent({
   },
   methods: {
     getComments() {
-      //@ts-ignore
-      onSnapshot(collection(db, "posts", this.id, "comments"), (querySnapshot) => {
+      
+      onSnapshot(query(collection(db, "comments"), where("postId", "==", this.id)), (querySnapshot) => {
           this.comments = [];
           querySnapshot.forEach((doc) => {
             this.comments.push({
-              postid: this.id,
-              commentid: doc.id,
-              useremail: doc.data().email,
-              username: doc.data().username,
+              postId: this.id,
+              commentId: doc.id,
+              userId: doc.data().userId,
+              userEmail: doc.data().userEmail,
+              userName: doc.data().userName,
               date: doc.data().date.toDate(),
               content: doc.data().content,
               rating: doc.data().rating,
-              upvotedby: doc.data().upvotedby,
-              downvotedby: doc.data().downvotedby,
-              homeView: false,
+              upvotedBy: doc.data().upvotedBy,
+              downvotedBy: doc.data().downvotedBy,
             });
           });
-        }
-      );
+        });
     },
     async getPost() {
       //@ts-ignore
@@ -61,12 +60,14 @@ export default defineComponent({
         this.post.push({
           id: result.id,
           title: result.data()?.title,
-          author: result.data()?.user,
+          author: result.data()?.userName,
           date: result.data()?.date.toDate(),
           content: result.data()?.content,
-          email: result.data()?.email,
+          email: result.data()?.userEmail,
+          userId: result.data()?.userId,
           rating: result.data()?.rating,
-          upvotedby: result.data()?.upvotedby,
+          upvotedBy: result.data()?.upvotedBy,
+          downvotedBy: result.data()?.downvotedBy,
         });
         this.hasData = true;
         this.comments.sort(this.sortByDateDesc);
