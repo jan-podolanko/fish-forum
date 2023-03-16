@@ -30,9 +30,6 @@ export default defineComponent({
               updateProfile(user, {
                 displayName: this.form.name,
               });
-              this.$router.push({
-                name: "home",
-              });
             }
             //@ts-ignore
             setDoc(doc(db, "users", user.uid), {
@@ -43,6 +40,9 @@ export default defineComponent({
           })
           .catch((error) => {
             this.error = error.message;
+          });
+          this.$router.push({
+                name: "home",
           });
       } else {
         this.error = "Passwords don't match.";

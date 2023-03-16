@@ -22,6 +22,8 @@ export default defineComponent({
       showFilter: false,
       userName: "",
       userEmail: "",
+      postView: true,
+      changeViewMessage: "Change to comment view",
     };
   },
   computed: {
@@ -109,35 +111,68 @@ export default defineComponent({
 </script>
 
 <template>
-    <div> Posts by {{ userName }}</div>
+  <div id="header">
+    <div id="user-posts-header"> Overview of user: {{ userName }}</div>
+    <button v-if="postView" @click="()=>postView = !postView">Change to comment view</button>
+    <button v-else @click="()=>postView = !postView">Change to post view</button>
+  </div>
   <div v-if="user.loggedIn">
-    <span>Sort by: </span>
-    <button class="sort-button" @click="posts.sort(sortByDateAsc)">
-      By date, ascending
-    </button>
-    <button class="sort-button" @click="posts.sort(sortByDateDesc)">
-      By date, descending
-    </button>
-    <button class="sort-button" @click="posts.sort(sortByRatingAsc)">
-      By rating, ascending
-    </button>
-    <button class="sort-button" @click="posts.sort(sortByRatingDesc)">
-      By rating, descending
-    </button>
-    <button class="sort-button" @click="showFilter = !showFilter">
-      Search
-      <span class="material-symbols-outlined">search</span>
-    </button>
-    <div id="search-box" v-show="showFilter">
-      <div>Search:</div>
-      <input id="search" v-model="filtering" />
+    <div v-if="postView" id="sort-box">
+      <span>Sort by: </span>
+      <button class="sort-button" @click="posts.sort(sortByDateAsc)">
+        By date, ascending
+      </button>
+      <button class="sort-button" @click="posts.sort(sortByDateDesc)">
+        By date, descending
+      </button>
+      <button class="sort-button" @click="posts.sort(sortByRatingAsc)">
+        By rating, ascending
+      </button>
+      <button class="sort-button" @click="posts.sort(sortByRatingDesc)">
+        By rating, descending
+      </button>
+      <button class="sort-button" @click="showFilter = !showFilter">
+        Search
+        <span class="material-symbols-outlined">search</span>
+      </button>
+      <div id="search-box" v-show="showFilter">
+        <div>Search:</div>
+        <input id="search" v-model="filtering" />
+      </div>
+    </div>
+    <div v-else id="sort-box">
+      <span>Sort by: </span>
+      <button class="sort-button" @click="comments.sort(sortByDateAsc)">
+        By date, ascending
+      </button>
+      <button class="sort-button" @click="comments.sort(sortByDateDesc)">
+        By date, descending
+      </button>
+      <button class="sort-button" @click="comments.sort(sortByRatingAsc)">
+        By rating, ascending
+      </button>
+      <button class="sort-button" @click="comments.sort(sortByRatingDesc)">
+        By rating, descending
+      </button>
+      <button class="sort-button" @click="showFilter = !showFilter">
+        Search
+        <span class="material-symbols-outlined">search</span>
+      </button>
+      <div id="search-box" v-show="showFilter">
+        <div>Search:</div>
+        <input id="search" v-model="filtering" />
+      </div>
     </div>
     <main>
-      <div v-for="post1 in searchForPost()" :key="post1.id">
-        <UserPost v-bind="post1" />
+      <div v-if="postView">
+        <div v-for="post1 in searchForPost()" :key="post1.id">
+          <UserPost v-bind="post1" />
+        </div>
       </div>
-      <div v-for="comment in searchForComment()" :key="comment.id">
-        <PostComment v-bind="comment" />
+      <div v-else>
+        <div v-for="comment in searchForComment()" :key="comment.id">
+          <PostComment v-bind="comment" />
+        </div>
       </div>
     </main>
   </div>
@@ -148,7 +183,23 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "../assets/colors.scss";
-
+#header {
+  margin-left: 10px;
+}
+#header > * {
+  display: inline;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+#user-posts-header {
+  font-size: large;
+}
+#sort-box {
+  margin-left: 10px;
+}
+#sort-box > * {
+  display: inline;
+}
 .sort-button {
   margin-left: 10px;
   margin-top: 10px;
@@ -165,7 +216,6 @@ button {
 button > span {
   font-size: medium;
   margin-left: 0;
-  vertical-align: -2.8px;
 }
 button:hover {
   background-color: $primary-dark;

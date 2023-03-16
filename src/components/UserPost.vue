@@ -134,7 +134,8 @@ export default defineComponent({
   width: calc(100% - 70px);
 }
 .post-content {
-  margin: 15px;
+  margin-left: 15px;
+  margin-bottom: 5px;
 }
 #post-title {
   font-size: 2em;
@@ -146,7 +147,7 @@ export default defineComponent({
 }
 button {
   background-color: $primary;
-  border-radius: 7px;
+  border-radius: 6px;
   color: $on-primary;
   border: 0;
 }
